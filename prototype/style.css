@@ -346,3 +346,4 @@ a.gantt-nom:hover { color: var(--idq-rouge); }
 a.pilule { color: var(--idq-noir); text-decoration: none; }
 a.pilule:hover { filter: brightness(0.95); }
 .bouton.texte-rouge { color: var(--idq-rouge); }
+.fenetre--petite { width: min(460px, calc(100vw - 32px)); }

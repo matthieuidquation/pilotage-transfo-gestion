@@ -11,11 +11,11 @@
 </head>
 <body>
   <header class="entete entete--app">
-    <a class="logo" href="#/"><img src="../assets/logos/idquation-horizontal-couleur.webp" alt="ID.Quation"></a>
+    <a class="logo" href="#accueil"><img src="../assets/logos/idquation-horizontal-couleur.webp" alt="ID.Quation"></a>
     <nav class="nav" aria-label="Navigation principale">
-      <a href="#/" data-nav="accueil">Feuille de route</a>
-      <a href="#/synthese" data-nav="synthese">Synthèse</a>
-      <a href="#/responsables" data-nav="responsables">Responsables</a>
+      <a href="#accueil" data-nav="accueil">Feuille de route</a>
+      <a href="#synthese" data-nav="synthese">Synthèse</a>
+      <a href="#responsables" data-nav="responsables">Responsables</a>
     </nav>
     <div class="ligne utilisateur">
       <span class="pilule pilule--jaune" id="pilule-demo" title="Les données restent dans ce navigateur">Mode démo</span>
@@ -136,6 +136,20 @@
         <span class="espace-flex"></span>
         <button value="annuler" class="bouton bouton--discret" formnovalidate>Annuler</button>
         <button value="valider" class="bouton">Enregistrer</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Fenêtre : question (confirmation ou saisie courte) -->
+  <dialog id="dlg-question" class="fenetre fenetre--petite">
+    <form method="dialog" class="pile">
+      <h2 id="dlg-question-titre"></h2>
+      <p id="dlg-question-message"></p>
+      <label class="sr-only" for="f-question">Réponse</label>
+      <input id="f-question" class="saisie" hidden>
+      <div class="ligne fenetre-boutons">
+        <button value="annuler" class="bouton bouton--discret" formnovalidate>Annuler</button>
+        <button value="valider" class="bouton" id="dlg-question-ok">Valider</button>
       </div>
     </form>
   </dialog>

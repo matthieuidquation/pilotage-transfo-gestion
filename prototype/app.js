@@ -174,8 +174,8 @@ function remplirChoixResponsables(conteneur, choisis) {
     `<button type="button" class="bouton bouton--discret bouton--petit" data-ajout-resp>+ Ajouter</button>`;
 
   conteneur.querySelector("[data-ajout-resp]").onclick = async () => {
-    const nom = prompt("Nom du nouveau responsable :");
-    if (!nom || !nom.trim()) return;
+    const nom = await demander({ titre: "Nouveau responsable", valeur: "", ok: "Ajouter" });
+    if (!nom) return;
     const coches = $$("input:checked", conteneur).map((i) => i.value);
     const resp = await Donnees.ajouterResponsable(nom);
     rafraichirEtat();
@@ -187,6 +187,32 @@ const lireChoixResponsables = (conteneur) => $$("input:checked", conteneur).map(
 // ---------------------------------------------------------------------------
 // Fenêtres (dialog)
 // ---------------------------------------------------------------------------
+
+// Question intégrée à la page (remplace confirm() et prompt()).
+// Renvoie true / false, ou le texte saisi (null si annulé) quand `valeur` est fournie.
+function demander({ titre, message = "", valeur, ok = "Valider", danger = false }) {
+  const dlg = $("#dlg-question");
+  const avecChamp = valeur !== undefined;
+  $("#dlg-question-titre").textContent = titre;
+  $("#dlg-question-message").textContent = message;
+  $("#dlg-question-message").hidden = !message;
+  $("#f-question").hidden = !avecChamp;
+  $("#f-question").required = avecChamp;
+  $("#f-question").value = avecChamp ? valeur : "";
+  const bouton = $("#dlg-question-ok");
+  bouton.textContent = ok;
+  bouton.classList.toggle("bouton--sombre", danger);
+  dlg.returnValue = "";
+  dlg.showModal();
+  if (avecChamp) $("#f-question").focus();
+  return new Promise((resoudre) => {
+    dlg.onclose = () => {
+      const valide = dlg.returnValue === "valider";
+      resoudre(avecChamp ? (valide ? $("#f-question").value.trim() || null : null) : valide);
+    };
+  });
+}
+
 function ouvrirFenetre(dlg, auValider) {
   dlg.returnValue = "";
   dlg.showModal();
@@ -262,7 +288,7 @@ function fenetreBrique(brique, statutParDefaut = "a-ouvrir") {
     } else {
       const nouvelle = await Donnees.creerBrique(champs);
       toast("Brique créée");
-      location.hash = `#/brique/${nouvelle.id}`;
+      location.hash = `#brique-${nouvelle.id}`;
     }
   });
 }
@@ -283,7 +309,7 @@ function fenetreAction(briqueId, action) {
 
   ouvrirFenetre(dlg, async (choix) => {
     if (choix === "supprimer") {
-      if (!confirm(`Supprimer l'action « ${a.intitule} » ?`)) return;
+      if (!(await demander({ titre: "Supprimer l'action ?", message: a.intitule, ok: "Supprimer", danger: true }))) return;
       await Donnees.supprimerAction(action.id);
       toast("Action supprimée");
       return afficher();
@@ -331,7 +357,7 @@ function carteBrique(b) {
   return `
     <article class="carte carte-brique carte-brique--${b.statut}" data-id="${b.id}">
       ${poignee(b.nom)}
-      <a class="carte-brique-corps" href="#/brique/${b.id}">
+      <a class="carte-brique-corps" href="#brique-${b.id}">
         <div class="ligne">
           <h3>${esc(b.nom)}</h3>
           ${pilulePriorite(b.priorite)}
@@ -445,7 +471,7 @@ function ligneHistorique(h) {
 function ecranBrique(id) {
   const b = E.briques.find((x) => x.id === id);
   if (!b) {
-    $("#vue").innerHTML = `<p class="alerte">Cette brique n'existe pas (ou plus). <a href="#/">Retour à la feuille de route</a></p>`;
+    $("#vue").innerHTML = `<p class="alerte">Cette brique n'existe pas (ou plus). <a href="#accueil">Retour à la feuille de route</a></p>`;
     return;
   }
   const acts = actionsDe(id);
@@ -453,7 +479,7 @@ function ecranBrique(id) {
   const av = avancement(id);
 
   $("#vue").innerHTML = `
-    <p><a href="#/">← Feuille de route</a></p>
+    <p><a href="#accueil">← Feuille de route</a></p>
     <section class="carte fiche-brique carte-brique--${b.statut}">
       <div class="ligne">
         <h1 class="titre-brique">${esc(b.nom)}</h1>
@@ -561,10 +587,10 @@ function gantt(briques) {
     const titre = `${b.nom} — ${dateFr(b.debut)} → ${libelleFin(b)} — ${STATUTS_BRIQUE[b.statut]} — ${av.faites}/${av.total} actions faites`;
     return `
       <div class="gantt-ligne">
-        <a class="gantt-nom" href="#/brique/${b.id}">${esc(b.nom)}</a>
+        <a class="gantt-nom" href="#brique-${b.id}">${esc(b.nom)}</a>
         <div class="gantt-piste">
           ${separateurs}
-          <a href="#/brique/${b.id}" class="gantt-barre gantt-barre--${b.statut} ${b.enContinu ? "gantt-barre--continu" : ""}"
+          <a href="#brique-${b.id}" class="gantt-barre gantt-barre--${b.statut} ${b.enContinu ? "gantt-barre--continu" : ""}"
              style="left:${g}%;width:${l}%" title="${esc(titre)}">
             <span class="gantt-rempli" style="width:${b.statut === "a-ouvrir" ? 0 : av.pct}%"></span>
             <span class="gantt-texte">${av.total ? `${av.faites}/${av.total}` : ""}${retards ? " ⚠" : ""}</span>
@@ -601,7 +627,7 @@ function listeActionsSynthese(actions, vide) {
   return `<ul class="liste-synthese">${actions.map((a) => {
     const b = E.briques.find((x) => x.id === a.briqueId);
     return `<li>
-      <a href="#/brique/${a.briqueId}">${esc(a.intitule)}</a>
+      <a href="#brique-${a.briqueId}">${esc(a.intitule)}</a>
       <span class="texte-doux petit">${esc(b?.nom)} · ${esc(libelleResponsables(a.responsables))} · ${dateFr(a.echeance)}</span>
       <span class="ligne">${enRetard(a) ? piluleRetard() : ""} ${piluleStatutAction(a.statut)} ${pilulePriorite(a.priorite)}</span>
       ${a.commentaire ? `<span class="action-commentaire">💬 ${esc(a.commentaire)}</span>` : ""}
@@ -631,7 +657,7 @@ function ecranSynthese() {
       <h1>Synthèse</h1>
       <span class="espace-flex"></span>
       <span class="texte-doux">au ${auj.toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })}</span>
-      <button class="bouton bouton--secondaire bouton--petit sans-impression" onclick="window.print()">Imprimer / PDF</button>
+      <button class="bouton bouton--secondaire bouton--petit sans-impression sans-artifact" onclick="window.print()">Imprimer / PDF</button>
     </div>
 
     <div class="ligne filtres" role="group" aria-label="Filtrer par responsable">
@@ -643,14 +669,14 @@ function ecranSynthese() {
     <section class="carte section-synthese">
       <h2>La frise des briques</h2>
       ${gantt(briquesF)}
-      ${aPlanifier.length ? `<p class="petit"><strong>À planifier :</strong> ${aPlanifier.map((b) => `<a class="pilule statut-b statut-b--a-ouvrir" href="#/brique/${b.id}">${esc(b.nom)}</a>`).join(" ")}</p>` : ""}
+      ${aPlanifier.length ? `<p class="petit"><strong>À planifier :</strong> ${aPlanifier.map((b) => `<a class="pilule statut-b statut-b--a-ouvrir" href="#brique-${b.id}">${esc(b.nom)}</a>`).join(" ")}</p>` : ""}
     </section>
 
     <section class="carte section-synthese">
       <h2>Où en sont les briques ouvertes&nbsp;?</h2>
       ${ouvertes.length ? `<ul class="liste-avancement">${ouvertes.map((b) => `
         <li>
-          <a href="#/brique/${b.id}"><strong>${esc(b.nom)}</strong></a>
+          <a href="#brique-${b.id}"><strong>${esc(b.nom)}</strong></a>
           <span class="texte-doux petit">${esc(libelleResponsables(b.responsables))} · ${b.enContinu ? "en continu" : `jusqu'au ${dateFr(b.fin)}`}</span>
           ${barre(avancement(b.id))}
         </li>`).join("")}</ul>` : `<p class="texte-doux">Aucune brique ouverte pour ce filtre.</p>`}
@@ -739,9 +765,9 @@ document.addEventListener("click", async (e) => {
     case "cloturer-brique": {
       const reste = actionsDe(brique.id).filter((a) => a.statut !== "fait").length;
       const msg = reste
-        ? `Il reste ${reste} action${reste > 1 ? "s" : ""} non faite${reste > 1 ? "s" : ""}. Clôturer quand même la brique ?`
-        : "Toutes les actions sont faites. Clôturer la brique ?";
-      if (!confirm(msg)) return;
+        ? `Il reste ${reste} action${reste > 1 ? "s" : ""} non faite${reste > 1 ? "s" : ""}. Tu peux clôturer quand même.`
+        : "Toutes les actions sont faites. Bravo !";
+      if (!(await demander({ titre: "Clôturer la brique ?", message: msg, ok: "Clôturer" }))) return;
       await Donnees.majBrique(brique.id, { statut: "terminee" });
       toast("Brique clôturée. Beau travail ! 🎉");
       return afficher();
@@ -750,10 +776,10 @@ document.addEventListener("click", async (e) => {
       await Donnees.majBrique(brique.id, { statut: "ouverte" });
       return afficher();
     case "supprimer-brique":
-      if (!confirm(`Supprimer définitivement la brique « ${brique.nom} », ses actions et son historique ?\n\nPour une brique finie, préfère « Clôturer ».`)) return;
+      if (!(await demander({ titre: `Supprimer « ${brique.nom} » ?`, message: "La brique, ses actions et son historique seront effacés définitivement. Pour une brique finie, préfère « Clôturer ».", ok: "Supprimer", danger: true }))) return;
       await Donnees.supprimerBrique(brique.id);
       toast("Brique supprimée");
-      location.hash = "#/";
+      location.hash = "#accueil";
       return;
     case "nouvelle-action": return fenetreAction(brique.id, null);
     case "modifier-action": {
@@ -770,9 +796,9 @@ document.addEventListener("click", async (e) => {
     }
     case "renommer-resp": {
       const r = E.responsables.find((x) => x.id === btn.closest("[data-id]").dataset.id);
-      const nom = prompt("Nouveau nom :", r.nom);
-      if (!nom || !nom.trim()) return;
-      await Donnees.majResponsable(r.id, { nom: nom.trim() });
+      const nom = await demander({ titre: "Renommer", valeur: r.nom, ok: "Renommer" });
+      if (!nom) return;
+      await Donnees.majResponsable(r.id, { nom });
       return afficher();
     }
     case "basculer-resp": {
@@ -788,9 +814,10 @@ document.addEventListener("click", async (e) => {
 // Navigation
 // ---------------------------------------------------------------------------
 function routeCourante() {
-  const morceaux = location.hash.replace(/^#\/?/, "").split("/");
-  if (morceaux[0] === "brique" && morceaux[1]) return { nom: "brique", id: morceaux[1] };
-  if (["synthese", "responsables"].includes(morceaux[0])) return { nom: morceaux[0] };
+  const h = location.hash.replace(/^#\/?/, "");
+  const m = h.match(/^brique-(.+)$/);
+  if (m) return { nom: "brique", id: m[1] };
+  if (["synthese", "responsables"].includes(h)) return { nom: h };
   return { nom: "accueil" };
 }
 
@@ -831,7 +858,7 @@ window.addEventListener("hashchange", () => {
   $("#pilule-demo").hidden = Donnees.mode !== "demo";
   $("#reinitialiser").hidden = Donnees.mode !== "demo";
   $("#reinitialiser").addEventListener("click", async () => {
-    if (!confirm("Remettre les données de départ ? Toutes les modifications faites dans ce navigateur seront effacées.")) return;
+    if (!(await demander({ titre: "Réinitialiser la démo ?", message: "Les données de départ reviennent. Toutes les modifications faites dans ce navigateur seront effacées.", ok: "Réinitialiser", danger: true }))) return;
     await Donnees.reinitialiser();
     toast("Données de départ rechargées");
     afficher();
