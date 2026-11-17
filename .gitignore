@@ -1,0 +1,18 @@
+# Secrets — ne jamais les committer
+.env
+.env.*
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# Dépendances (si le proto monte en puissance)
+node_modules/
+.next/
+.vercel/
+
+# Polices sous licence (Boston, Diazo) — ne jamais les committer
+*.otf
+*.ttf
+*.woff
+*.woff2

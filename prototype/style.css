@@ -1,0 +1,10 @@
+/* Styles propres à ce prototype.
+   Les couleurs, polices et composants (boutons, cartes, pilules…) viennent du
+   design system : ../design-system/idquation.css — voir son catalogue
+   design-system/index.html. Ici, on n'ajoute que ce qui est spécifique au proto. */
+
+.hero { padding: var(--espace-7) 0; }
+.hero h1 { margin-bottom: var(--espace-4); }
+
+.gamme { padding-bottom: var(--espace-7); }
+.gamme h2 { font-size: var(--taille-l); }

@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Design system ID.Quation</title>
+  <!-- Police Diazo : projet web Adobe Fonts ID.Quation -->
+  <link rel="stylesheet" href="https://use.typekit.net/hhx4iux.css">
+  <link rel="stylesheet" href="idquation.css">
+  <style>
+    /* Styles propres au catalogue (pas à réutiliser dans les protos) */
+    .ds-nav { display: flex; flex-wrap: wrap; gap: var(--espace-2); }
+    .ds-nav a { text-decoration: none; }
+    .ds-bloc { margin-bottom: var(--espace-7); }
+    .ds-demo { background: var(--idq-blanc); border-radius: var(--arrondi-l); padding: var(--espace-5); margin-bottom: var(--espace-3); }
+    .ds-code {
+      background: var(--idq-noir); color: var(--idq-creme);
+      border-radius: var(--arrondi-m); padding: var(--espace-4);
+      font: 0.85rem/1.5 ui-monospace, Menlo, Consolas, monospace;
+      overflow-x: auto; white-space: pre; margin: 0;
+    }
+    .ds-pastille { border-radius: var(--arrondi-m); overflow: hidden; background: var(--idq-blanc); box-shadow: var(--ombre-douce); }
+    .ds-pastille .couleur { height: 80px; }
+    .ds-pastille .infos { padding: var(--espace-3); font-size: var(--taille-s); }
+    .ds-pastille code { color: var(--idq-gris); font-size: var(--taille-xs); }
+    #logos .grille { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+    .ds-logo { margin: 0; background: var(--idq-blanc); border-radius: var(--arrondi-m); overflow: hidden; box-shadow: var(--ombre-douce); }
+    .ds-logo-fond { display: grid; place-items: center; height: 150px; padding: var(--espace-4); background: var(--idq-blanc); }
+    .ds-logo-fond--sombre { background: var(--idq-noir); }
+    .ds-logo-fond--carre { height: 220px; padding: 0; }
+    .ds-logo .ds-logo-fond--carre img { max-height: 220px; height: 220px; }
+    .ds-logo-fond--teinte { background: var(--idq-bordure); }
+    .ds-logo-fond--fair { background: var(--play-fair); }
+    .ds-logo-fond--safe { background: var(--play-safe); }
+    .ds-logo-fond--form { background: var(--play-form); }
+    .ds-logo-fond--zen  { background: var(--play-zen); }
+    .ds-logo img { max-width: 100%; max-height: 110px; }
+    .ds-logo video { display: block; width: 100%; aspect-ratio: 16 / 9; background: var(--idq-blanc); }
+    .ds-logo figcaption { padding: var(--espace-3); font-size: var(--taille-s); }
+    .ds-logo code { color: var(--idq-gris); font-size: var(--taille-xs); }
+    .ds-video-exemple { display: grid; place-items: center; aspect-ratio: 16 / 9; background: linear-gradient(135deg, var(--idq-jaune-doux), var(--play-safe-doux)); color: var(--idq-gris); font-weight: 600; }
+    .ds-espace { background: var(--idq-rouge); height: 16px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <header class="entete">
+    <a class="logo" href="#"><img src="../assets/logos/idquation-horizontal-couleur.webp" alt="ID.Quation"></a>
+    <span class="pilule">Design system</span>
+  </header>
+
+  <main class="conteneur">
+    <section class="section">
+      <h1>Le design system <span class="surligne">ID.Quation</span></h1>
+      <p>Toutes les briques pour construire un prototype à la marque, en un clin d'œil. Valeur humaine augmentée&nbsp;!</p>
+      <p class="texte-doux">Pour l'utiliser dans un prototype, deux lignes dans le <code>&lt;head&gt;</code> (la police Diazo, puis le design system)&nbsp;:</p>
+      <pre class="ds-code">&lt;link rel="stylesheet" href="https://use.typekit.net/hhx4iux.css"&gt;
+&lt;link rel="stylesheet" href="../design-system/idquation.css"&gt;</pre>
+      <nav class="ds-nav" style="margin-top: var(--espace-5)">
+        <a class="pilule pilule--contour" href="#logos">Logos</a>
+        <a class="pilule pilule--contour" href="#logo-anime">Logo animé</a>
+        <a class="pilule pilule--contour" href="#couleurs">Couleurs</a>
+        <a class="pilule pilule--contour" href="#typo">Typographie</a>
+        <a class="pilule pilule--contour" href="#espaces">Espaces &amp; formes</a>
+        <a class="pilule pilule--contour" href="#boutons">Boutons</a>
+        <a class="pilule pilule--contour" href="#pilules">Pilules</a>
+        <a class="pilule pilule--contour" href="#cartes">Cartes</a>
+        <a class="pilule pilule--contour" href="#formulaires">Formulaires</a>
+        <a class="pilule pilule--contour" href="#choix">Quiz</a>
+        <a class="pilule pilule--contour" href="#alertes">Messages</a>
+        <a class="pilule pilule--contour" href="#progression">Progression</a>
+        <a class="pilule pilule--contour" href="#ton">Ton de marque</a>
+      </nav>
+    </section>
+
+    <!-- Logos -->
+    <section class="ds-bloc" id="logos">
+      <h2>Logos</h2>
+      <p class="texte-doux">Tous les fichiers sont dans <code>assets/logos/</code>. Sur fond clair, on prend une version foncée&nbsp;; sur fond sombre, une version blanche.</p>
+      <h3>Logo principal (l'original)</h3>
+      <div class="ds-logo" style="margin-bottom: var(--espace-5)"><div class="ds-logo-fond" style="height: 220px"><img src="../assets/logos/idquation-horizontal-couleur-signature.webp" alt="ID.Quation – Valeur humaine augmentée" style="max-height: 180px"></div><figcaption><strong>Horizontal couleur + signature</strong> — le logo de référence, pour les grands formats (accueil, écran de fin, pied de page)<br><code>idquation-horizontal-couleur-signature.webp</code></figcaption></div>
+      <h3>Sur fond clair</h3>
+      <div class="grille" style="margin-bottom: var(--espace-5)">
+        <figure class="ds-logo"><div class="ds-logo-fond"><img src="../assets/logos/idquation-horizontal-couleur.webp" alt="Logo ID.Quation – Horizontal couleur (par défaut)"></div><figcaption><strong>Horizontal couleur (par défaut)</strong><br><code>idquation-horizontal-couleur.webp</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond"><img src="../assets/logos/idquation-vertical-couleur.png" alt="Logo ID.Quation – Vertical couleur"></div><figcaption><strong>Vertical couleur</strong><br><code>idquation-vertical-couleur.png</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond"><img src="../assets/logos/idquation-vertical-couleur-signature.webp" alt="Logo ID.Quation – Vertical couleur + signature"></div><figcaption><strong>Vertical couleur + signature</strong><br><code>idquation-vertical-couleur-signature.webp</code></figcaption></figure>
+      </div>
+      <h3>Sur fond sombre ou coloré</h3>
+      <div class="grille" style="margin-bottom: var(--espace-3)">
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--sombre"><img src="../assets/logos/idquation-horizontal-fond-sombre.webp" alt="Logo ID.Quation – Horizontal fond sombre"></div><figcaption><strong>Horizontal fond sombre</strong><br><code>idquation-horizontal-fond-sombre.webp</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--sombre"><img src="../assets/logos/idquation-horizontal-fond-sombre-signature.webp" alt="Logo ID.Quation – Horizontal fond sombre + signature"></div><figcaption><strong>Horizontal fond sombre + signature</strong><br><code>idquation-horizontal-fond-sombre-signature.webp</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--sombre"><img src="../assets/logos/idquation-vertical-fond-sombre.webp" alt="Logo ID.Quation – Vertical fond sombre + signature"></div><figcaption><strong>Vertical fond sombre + signature</strong><br><code>idquation-vertical-fond-sombre.webp</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--sombre"><img src="../assets/logos/idquation-horizontal-blanc.png" alt="Logo ID.Quation – Horizontal tout blanc"></div><figcaption><strong>Horizontal tout blanc</strong><br><code>idquation-horizontal-blanc.png</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--sombre"><img src="../assets/logos/idquation-horizontal-blanc-signature.png" alt="Logo ID.Quation – Horizontal tout blanc + signature"></div><figcaption><strong>Horizontal tout blanc + signature</strong><br><code>idquation-horizontal-blanc-signature.png</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--sombre"><img src="../assets/logos/idquation-vertical-blanc.png" alt="Logo ID.Quation – Vertical tout blanc"></div><figcaption><strong>Vertical tout blanc</strong><br><code>idquation-vertical-blanc.png</code></figcaption></figure>
+      </div>
+      <pre class="ds-code">&lt;a class="logo" href="#"&gt;&lt;img src="../assets/logos/idquation-horizontal-couleur.webp" alt="ID.Quation"&gt;&lt;/a&gt;</pre>
+
+      <h3 style="margin-top: var(--espace-6)">Logos des formations</h3>
+      <p class="texte-doux">Le logo propre à chaque formation, en forme de bulle « Q ». Deux familles : <strong>bulle blanche</strong> (à poser sur un fond teinté ou coloré, jamais sur du blanc) et <strong>bulle pleine</strong> (passe partout sur fond clair). Fichiers dans <code>assets/logos/&lt;formation&gt;/&lt;formation&gt;-logo-…</code>.</p>
+      <h4><span class="pilule pilule--safe">Play Safe</span> La sécurité augmentée</h4>
+      <p class="texte-doux"><strong>Bulle blanche</strong> — sur fond teinté ou coloré uniquement :</p>
+      <div class="grille" style="margin-bottom: var(--espace-5)">
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--carre ds-logo-fond--teinte"><img src="../assets/logos/play-safe/play-safe-logo-couleur.webp" alt="Logo Play Safe – Couleur"></div><figcaption><strong>Couleur</strong><br><code>play-safe-logo-couleur.webp</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--carre ds-logo-fond--teinte"><img src="../assets/logos/play-safe/play-safe-logo-couleur-signature.webp" alt="Logo Play Safe – Couleur + signature"></div><figcaption><strong>Couleur + signature</strong><br><code>play-safe-logo-couleur-signature.webp</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--carre ds-logo-fond--teinte"><img src="../assets/logos/play-safe/play-safe-logo-noir.webp" alt="Logo Play Safe – Noir"></div><figcaption><strong>Noir</strong><br><code>play-safe-logo-noir.webp</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--carre ds-logo-fond--safe"><img src="../assets/logos/play-safe/play-safe-logo-noir-signature-blanche.webp" alt="Logo Play Safe – Noir + signature blanche (fond coloré)"></div><figcaption><strong>Noir + signature blanche (fond coloré)</strong><br><code>play-safe-logo-noir-signature-blanche.webp</code></figcaption></figure>
+      </div>
+      <p class="texte-doux"><strong>Bulle pleine</strong> — sur tout fond clair, y compris le blanc :</p>
+      <div class="grille" style="margin-bottom: var(--espace-5)">
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--carre "><img src="../assets/logos/play-safe/play-safe-logo-couleur-plein.webp" alt="Logo Play Safe – Bulle couleur"></div><figcaption><strong>Bulle couleur</strong><br><code>play-safe-logo-couleur-plein.webp</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--carre "><img src="../assets/logos/play-safe/play-safe-logo-couleur-plein-signature.webp" alt="Logo Play Safe – Bulle couleur + signature"></div><figcaption><strong>Bulle couleur + signature</strong><br><code>play-safe-logo-couleur-plein-signature.webp</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--carre "><img src="../assets/logos/play-safe/play-safe-logo-brun-plein.webp" alt="Logo Play Safe – Bulle brune"></div><figcaption><strong>Bulle brune</strong><br><code>play-safe-logo-brun-plein.webp</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--carre "><img src="../assets/logos/play-safe/play-safe-logo-brun-plein-signature.webp" alt="Logo Play Safe – Bulle brune + signature"></div><figcaption><strong>Bulle brune + signature</strong><br><code>play-safe-logo-brun-plein-signature.webp</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--carre "><img src="../assets/logos/play-safe/play-safe-logo-noir-plein.webp" alt="Logo Play Safe – Bulle noire"></div><figcaption><strong>Bulle noire</strong><br><code>play-safe-logo-noir-plein.webp</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--carre "><img src="../assets/logos/play-safe/play-safe-logo-noir-plein-signature.webp" alt="Logo Play Safe – Bulle noire + signature"></div><figcaption><strong>Bulle noire + signature</strong><br><code>play-safe-logo-noir-plein-signature.webp</code></figcaption></figure>
+      </div>
+
+      <p class="texte-doux"><strong>Scan Safe</strong> — version couleur pour fond blanc, version blanche pour fond sombre.</p>
+      <div class="grille" style="margin-bottom: var(--espace-5)">
+        <figure class="ds-logo"><div class="ds-logo-fond"><img src="../assets/logos/play-safe/scan-safe-logo-couleur.jpg" alt="Logo Scan Safe"></div><figcaption><strong>Scan Safe – couleur (fond blanc)</strong><br><code>scan-safe-logo-couleur.jpg</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--sombre"><img src="../assets/logos/play-safe/scan-safe-logo-fond-sombre.png" alt="Logo Scan Safe"></div><figcaption><strong>Scan Safe – fond sombre</strong><br><code>scan-safe-logo-fond-sombre.png</code></figcaption></figure>
+      </div>
+
+      <p class="texte-doux"><strong>Safe Pilot</strong> — version couleur pour fond blanc, version blanche pour fond sombre.</p>
+      <div class="grille" style="margin-bottom: var(--espace-5)">
+        <figure class="ds-logo"><div class="ds-logo-fond"><img src="../assets/logos/play-safe/safe-pilot-logo-couleur.jpg" alt="Logo Safe Pilot"></div><figcaption><strong>Safe Pilot – couleur (fond blanc)</strong><br><code>safe-pilot-logo-couleur.jpg</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--sombre"><img src="../assets/logos/play-safe/safe-pilot-logo-fond-sombre.png" alt="Logo Safe Pilot"></div><figcaption><strong>Safe Pilot – fond sombre</strong><br><code>safe-pilot-logo-fond-sombre.png</code></figcaption></figure>
+      </div>
+
+      <p class="texte-doux"><strong>Replay Safe</strong> — version couleur pour fond blanc, version blanche pour fond sombre.</p>
+      <div class="grille" style="margin-bottom: var(--espace-5)">
+        <figure class="ds-logo"><div class="ds-logo-fond"><img src="../assets/logos/play-safe/replay-safe-logo-couleur.jpg" alt="Logo Replay Safe"></div><figcaption><strong>Replay Safe – couleur (fond blanc)</strong><br><code>replay-safe-logo-couleur.jpg</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--sombre"><img src="../assets/logos/play-safe/replay-safe-logo-fond-sombre.webp" alt="Logo Replay Safe"></div><figcaption><strong>Replay Safe – fond sombre</strong><br><code>replay-safe-logo-fond-sombre.webp</code></figcaption></figure>
+      </div>
+
+      <h4 style="margin-top: var(--espace-6)"><span class="pilule pilule--fair">Play Fair</span> La relation augmentée</h4>
+      <p class="texte-doux"><strong>Bulle blanche</strong> — sur fond teinté ou coloré uniquement :</p>
+      <div class="grille" style="margin-bottom: var(--espace-5)">
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--carre ds-logo-fond--teinte"><img src="../assets/logos/play-fair/play-fair-logo-couleur.webp" alt="Logo Couleur"></div><figcaption><strong>Couleur</strong><br><code>play-fair-logo-couleur.webp</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--carre ds-logo-fond--teinte"><img src="../assets/logos/play-fair/play-fair-logo-couleur-signature.webp" alt="Logo Couleur + signature"></div><figcaption><strong>Couleur + signature</strong><br><code>play-fair-logo-couleur-signature.webp</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--carre ds-logo-fond--teinte"><img src="../assets/logos/play-fair/play-fair-logo-noir.webp" alt="Logo Noir"></div><figcaption><strong>Noir</strong><br><code>play-fair-logo-noir.webp</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--carre ds-logo-fond--fair"><img src="../assets/logos/play-fair/play-fair-logo-noir-signature-blanche.webp" alt="Logo Noir + signature blanche (fond coloré)"></div><figcaption><strong>Noir + signature blanche (fond coloré)</strong><br><code>play-fair-logo-noir-signature-blanche.webp</code></figcaption></figure>
+      </div>
+      <p class="texte-doux"><strong>Bulle pleine</strong> — sur tout fond clair, y compris le blanc :</p>
+      <div class="grille" style="margin-bottom: var(--espace-5)">
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--carre "><img src="../assets/logos/play-fair/play-fair-logo-couleur-plein.webp" alt="Logo Bulle couleur"></div><figcaption><strong>Bulle couleur</strong><br><code>play-fair-logo-couleur-plein.webp</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--carre "><img src="../assets/logos/play-fair/play-fair-logo-couleur-plein-signature.webp" alt="Logo Bulle couleur + signature"></div><figcaption><strong>Bulle couleur + signature</strong><br><code>play-fair-logo-couleur-plein-signature.webp</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--carre "><img src="../assets/logos/play-fair/play-fair-logo-brun-plein.webp" alt="Logo Bulle brune"></div><figcaption><strong>Bulle brune</strong><br><code>play-fair-logo-brun-plein.webp</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--carre "><img src="../assets/logos/play-fair/play-fair-logo-brun-plein-signature.webp" alt="Logo Bulle brune + signature"></div><figcaption><strong>Bulle brune + signature</strong><br><code>play-fair-logo-brun-plein-signature.webp</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--carre "><img src="../assets/logos/play-fair/play-fair-logo-noir-plein.webp" alt="Logo Bulle noire"></div><figcaption><strong>Bulle noire</strong><br><code>play-fair-logo-noir-plein.webp</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--carre "><img src="../assets/logos/play-fair/play-fair-logo-noir-plein-signature.webp" alt="Logo Bulle noire + signature"></div><figcaption><strong>Bulle noire + signature</strong><br><code>play-fair-logo-noir-plein-signature.webp</code></figcaption></figure>
+      </div>
+
+      <p class="texte-doux"><strong>Scan Fair</strong> — version couleur pour fond clair, version blanche pour fond sombre.</p>
+      <div class="grille" style="margin-bottom: var(--espace-5)">
+        <figure class="ds-logo"><div class="ds-logo-fond"><img src="../assets/logos/play-fair/scan-fair-logo-couleur.jpg" alt="Logo Scan Fair"></div><figcaption><strong>Scan Fair – couleur (fond clair)</strong><br><code>scan-fair-logo-couleur.jpg</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--sombre"><img src="../assets/logos/play-fair/scan-fair-logo-fond-sombre.png" alt="Logo Scan Fair"></div><figcaption><strong>Scan Fair – fond sombre</strong><br><code>scan-fair-logo-fond-sombre.png</code></figcaption></figure>
+      </div>
+
+      <p class="texte-doux"><strong>Fair Pilot</strong> — version couleur pour fond blanc, version blanche pour fond sombre.</p>
+      <div class="grille" style="margin-bottom: var(--espace-5)">
+        <figure class="ds-logo"><div class="ds-logo-fond"><img src="../assets/logos/play-fair/fair-pilot-logo-couleur.jpg" alt="Logo Fair Pilot"></div><figcaption><strong>Fair Pilot – couleur (fond blanc)</strong><br><code>fair-pilot-logo-couleur.jpg</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--sombre"><img src="../assets/logos/play-fair/fair-pilot-logo-fond-sombre.png" alt="Logo Fair Pilot"></div><figcaption><strong>Fair Pilot – fond sombre</strong><br><code>fair-pilot-logo-fond-sombre.png</code></figcaption></figure>
+      </div>
+
+      <p class="texte-doux"><strong>Replay Fair</strong> — version couleur pour fond blanc, version blanche pour fond sombre.</p>
+      <div class="grille" style="margin-bottom: var(--espace-5)">
+        <figure class="ds-logo"><div class="ds-logo-fond"><img src="../assets/logos/play-fair/replay-fair-logo-couleur.jpg" alt="Logo Replay Fair"></div><figcaption><strong>Replay Fair – couleur (fond blanc)</strong><br><code>replay-fair-logo-couleur.jpg</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--sombre"><img src="../assets/logos/play-fair/replay-fair-logo-fond-sombre.webp" alt="Logo Replay Fair"></div><figcaption><strong>Replay Fair – fond sombre</strong><br><code>replay-fair-logo-fond-sombre.webp</code></figcaption></figure>
+      </div>
+
+      <h4 style="margin-top: var(--espace-6)"><span class="pilule pilule--form">Play Form</span> La santé augmentée</h4>
+      <p class="texte-doux"><strong>Bulle blanche</strong> — sur fond teinté ou coloré uniquement :</p>
+      <div class="grille" style="margin-bottom: var(--espace-5)">
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--carre ds-logo-fond--teinte"><img src="../assets/logos/play-form/play-form-logo-couleur.webp" alt="Logo Play Form – Couleur"></div><figcaption><strong>Couleur</strong><br><code>play-form-logo-couleur.webp</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--carre ds-logo-fond--teinte"><img src="../assets/logos/play-form/play-form-logo-couleur-signature.webp" alt="Logo Play Form – Couleur + signature"></div><figcaption><strong>Couleur + signature</strong><br><code>play-form-logo-couleur-signature.webp</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--carre ds-logo-fond--teinte"><img src="../assets/logos/play-form/play-form-logo-noir.webp" alt="Logo Play Form – Noir"></div><figcaption><strong>Noir</strong><br><code>play-form-logo-noir.webp</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--carre ds-logo-fond--form"><img src="../assets/logos/play-form/play-form-logo-noir-signature-blanche.webp" alt="Logo Play Form – Noir + signature blanche (fond coloré)"></div><figcaption><strong>Noir + signature blanche (fond coloré)</strong><br><code>play-form-logo-noir-signature-blanche.webp</code></figcaption></figure>
+      </div>
+      <p class="texte-doux"><strong>Bulle pleine</strong> — sur tout fond clair, y compris le blanc :</p>
+      <div class="grille" style="margin-bottom: var(--espace-5)">
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--carre "><img style="height: 130px; max-height: 130px" src="../assets/logos/play-form/play-form-logo-couleur-plein.png" alt="Logo Play Form – Bulle couleur"></div><figcaption><strong>Bulle couleur</strong><br><code>play-form-logo-couleur-plein.png</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--carre "><img src="../assets/logos/play-form/play-form-logo-couleur-plein-signature.webp" alt="Logo Play Form – Bulle couleur + signature"></div><figcaption><strong>Bulle couleur + signature</strong><br><code>play-form-logo-couleur-plein-signature.webp</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--carre "><img src="../assets/logos/play-form/play-form-logo-brun-plein.webp" alt="Logo Play Form – Bulle brune"></div><figcaption><strong>Bulle brune</strong><br><code>play-form-logo-brun-plein.webp</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--carre "><img src="../assets/logos/play-form/play-form-logo-brun-plein-signature.webp" alt="Logo Play Form – Bulle brune + signature"></div><figcaption><strong>Bulle brune + signature</strong><br><code>play-form-logo-brun-plein-signature.webp</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--carre "><img src="../assets/logos/play-form/play-form-logo-noir-plein.webp" alt="Logo Play Form – Bulle noire"></div><figcaption><strong>Bulle noire</strong><br><code>play-form-logo-noir-plein.webp</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--carre "><img src="../assets/logos/play-form/play-form-logo-noir-plein-signature.webp" alt="Logo Play Form – Bulle noire + signature"></div><figcaption><strong>Bulle noire + signature</strong><br><code>play-form-logo-noir-plein-signature.webp</code></figcaption></figure>
+      </div>
+
+      <p class="texte-doux"><strong>Scan Form</strong> — version couleur pour fond blanc, version blanche pour fond sombre.</p>
+      <div class="grille" style="margin-bottom: var(--espace-5)">
+        <figure class="ds-logo"><div class="ds-logo-fond"><img src="../assets/logos/play-form/scan-form-logo-couleur.jpg" alt="Logo Scan Form"></div><figcaption><strong>Scan Form – couleur (fond blanc)</strong><br><code>scan-form-logo-couleur.jpg</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--sombre"><img src="../assets/logos/play-form/scan-form-logo-fond-sombre.png" alt="Logo Scan Form"></div><figcaption><strong>Scan Form – fond sombre</strong><br><code>scan-form-logo-fond-sombre.png</code></figcaption></figure>
+      </div>
+
+      <p class="texte-doux"><strong>Form Pilot</strong> — version couleur pour fond blanc, version blanche pour fond sombre.</p>
+      <div class="grille" style="margin-bottom: var(--espace-5)">
+        <figure class="ds-logo"><div class="ds-logo-fond"><img src="../assets/logos/play-form/form-pilot-logo-couleur.jpg" alt="Logo Form Pilot"></div><figcaption><strong>Form Pilot – couleur (fond blanc)</strong><br><code>form-pilot-logo-couleur.jpg</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--sombre"><img src="../assets/logos/play-form/form-pilot-logo-fond-sombre.png" alt="Logo Form Pilot"></div><figcaption><strong>Form Pilot – fond sombre</strong><br><code>form-pilot-logo-fond-sombre.png</code></figcaption></figure>
+      </div>
+
+      <p class="texte-doux"><strong>Replay Form</strong> — version couleur pour fond blanc, version blanche pour fond sombre.</p>
+      <div class="grille" style="margin-bottom: var(--espace-5)">
+        <figure class="ds-logo"><div class="ds-logo-fond"><img src="../assets/logos/play-form/replay-form-logo-couleur.jpg" alt="Logo Replay Form"></div><figcaption><strong>Replay Form – couleur (fond blanc)</strong><br><code>replay-form-logo-couleur.jpg</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--sombre"><img src="../assets/logos/play-form/replay-form-logo-fond-sombre.webp" alt="Logo Replay Form"></div><figcaption><strong>Replay Form – fond sombre</strong><br><code>replay-form-logo-fond-sombre.webp</code></figcaption></figure>
+      </div>
+
+      <h4 style="margin-top: var(--espace-6)"><span class="pilule pilule--zen">Play Zen</span> La sérénité augmentée</h4>
+      <p class="texte-doux"><strong>Bulle blanche</strong> — sur fond teinté ou coloré uniquement :</p>
+      <div class="grille" style="margin-bottom: var(--espace-5)">
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--carre ds-logo-fond--teinte"><img src="../assets/logos/play-zen/play-zen-logo-couleur.webp" alt="Logo Play Zen – Couleur"></div><figcaption><strong>Couleur</strong><br><code>play-zen-logo-couleur.webp</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--carre ds-logo-fond--teinte"><img src="../assets/logos/play-zen/play-zen-logo-couleur-signature.webp" alt="Logo Play Zen – Couleur + signature"></div><figcaption><strong>Couleur + signature</strong><br><code>play-zen-logo-couleur-signature.webp</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--carre ds-logo-fond--teinte"><img src="../assets/logos/play-zen/play-zen-logo-noir.webp" alt="Logo Play Zen – Noir"></div><figcaption><strong>Noir</strong><br><code>play-zen-logo-noir.webp</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--carre ds-logo-fond--zen"><img src="../assets/logos/play-zen/play-zen-logo-noir-signature-blanche.webp" alt="Logo Play Zen – Noir + signature blanche (fond coloré)"></div><figcaption><strong>Noir + signature blanche (fond coloré)</strong><br><code>play-zen-logo-noir-signature-blanche.webp</code></figcaption></figure>
+      </div>
+      <p class="texte-doux"><strong>Bulle pleine</strong> — sur tout fond clair, y compris le blanc :</p>
+      <div class="grille" style="margin-bottom: var(--espace-5)">
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--carre "><img src="../assets/logos/play-zen/play-zen-logo-couleur-plein.webp" alt="Logo Play Zen – Bulle couleur"></div><figcaption><strong>Bulle couleur</strong><br><code>play-zen-logo-couleur-plein.webp</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--carre "><img src="../assets/logos/play-zen/play-zen-logo-couleur-plein-signature.webp" alt="Logo Play Zen – Bulle couleur + signature"></div><figcaption><strong>Bulle couleur + signature</strong><br><code>play-zen-logo-couleur-plein-signature.webp</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--carre "><img src="../assets/logos/play-zen/play-zen-logo-brun-plein.webp" alt="Logo Play Zen – Bulle brune"></div><figcaption><strong>Bulle brune</strong><br><code>play-zen-logo-brun-plein.webp</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--carre "><img src="../assets/logos/play-zen/play-zen-logo-brun-plein-signature.webp" alt="Logo Play Zen – Bulle brune + signature"></div><figcaption><strong>Bulle brune + signature</strong><br><code>play-zen-logo-brun-plein-signature.webp</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--carre "><img src="../assets/logos/play-zen/play-zen-logo-noir-plein.webp" alt="Logo Play Zen – Bulle noire"></div><figcaption><strong>Bulle noire</strong><br><code>play-zen-logo-noir-plein.webp</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--carre "><img src="../assets/logos/play-zen/play-zen-logo-noir-plein-signature.webp" alt="Logo Play Zen – Bulle noire + signature"></div><figcaption><strong>Bulle noire + signature</strong><br><code>play-zen-logo-noir-plein-signature.webp</code></figcaption></figure>
+      </div>
+
+      <p class="texte-doux"><strong>Scan Zen</strong> — version couleur pour fond blanc, version blanche pour fond sombre.</p>
+      <div class="grille" style="margin-bottom: var(--espace-5)">
+        <figure class="ds-logo"><div class="ds-logo-fond"><img src="../assets/logos/play-zen/scan-zen-logo-couleur.jpg" alt="Logo Scan Zen"></div><figcaption><strong>Scan Zen – couleur (fond blanc)</strong><br><code>scan-zen-logo-couleur.jpg</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--sombre"><img src="../assets/logos/play-zen/scan-zen-logo-fond-sombre.png" alt="Logo Scan Zen"></div><figcaption><strong>Scan Zen – fond sombre</strong><br><code>scan-zen-logo-fond-sombre.png</code></figcaption></figure>
+      </div>
+
+      <p class="texte-doux"><strong>Zen Pilot</strong> — version couleur pour fond blanc, version blanche pour fond sombre.</p>
+      <div class="grille" style="margin-bottom: var(--espace-5)">
+        <figure class="ds-logo"><div class="ds-logo-fond"><img src="../assets/logos/play-zen/zen-pilot-logo-couleur.jpg" alt="Logo Zen Pilot"></div><figcaption><strong>Zen Pilot – couleur (fond blanc)</strong><br><code>zen-pilot-logo-couleur.jpg</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--sombre"><img src="../assets/logos/play-zen/zen-pilot-logo-fond-sombre.png" alt="Logo Zen Pilot"></div><figcaption><strong>Zen Pilot – fond sombre</strong><br><code>zen-pilot-logo-fond-sombre.png</code></figcaption></figure>
+      </div>
+
+      <p class="texte-doux"><strong>Replay Zen</strong> — version couleur pour fond blanc, version blanche pour fond sombre.</p>
+      <div class="grille" style="margin-bottom: var(--espace-5)">
+        <figure class="ds-logo"><div class="ds-logo-fond"><img src="../assets/logos/play-zen/replay-zen-logo-couleur.jpg" alt="Logo Replay Zen"></div><figcaption><strong>Replay Zen – couleur (fond blanc)</strong><br><code>replay-zen-logo-couleur.jpg</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--sombre"><img src="../assets/logos/play-zen/replay-zen-logo-fond-sombre.webp" alt="Logo Replay Zen"></div><figcaption><strong>Replay Zen – fond sombre</strong><br><code>replay-zen-logo-fond-sombre.webp</code></figcaption></figure>
+      </div>
+
+      <h3 style="margin-top: var(--espace-6)">Logo ID.Quation aux couleurs des formations</h3>
+      <p class="texte-doux">Le logo ID.Quation décliné aux couleurs de chaque formation Play : le point de l'œil et des « i » prend la couleur de la formation. Fichiers dans <code>assets/logos/&lt;formation&gt;/idquation-…</code>. Sert de signature à côté du logo de la formation.</p>
+      <h4><span class="pilule pilule--safe">Play Safe</span> La sécurité augmentée</h4>
+      <div class="grille" style="margin-bottom: var(--espace-3)">
+        <figure class="ds-logo"><div class="ds-logo-fond"><img src="../assets/logos/play-safe/idquation-play-safe-horizontal-couleur-signature.webp" alt="Logo ID.Quation aux couleurs Play Safe – horizontal couleur + signature"></div><figcaption><strong>ID.Quation × Play Safe – horizontal couleur + signature</strong><br><code>play-safe/idquation-play-safe-horizontal-couleur-signature.webp</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--sombre"><img src="../assets/logos/play-safe/idquation-play-safe-horizontal-fond-sombre-signature.webp" alt="Logo ID.Quation aux couleurs Play Safe – fond sombre + signature"></div><figcaption><strong>ID.Quation × Play Safe – fond sombre + signature</strong><br><code>play-safe/idquation-play-safe-horizontal-fond-sombre-signature.webp</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond"><img src="../assets/logos/play-safe/idquation-play-safe-icone.webp" alt="Logo ID.Quation aux couleurs Play Safe – icône seule"></div><figcaption><strong>ID.Quation × Play Safe – icône seule</strong><br><code>play-safe/idquation-play-safe-icone.webp</code></figcaption></figure>
+      </div>
+      <h4><span class="pilule pilule--fair">Play Fair</span> La relation augmentée</h4>
+      <div class="grille" style="margin-bottom: var(--espace-3)">
+        <figure class="ds-logo"><div class="ds-logo-fond"><img src="../assets/logos/play-fair/idquation-play-fair-horizontal-couleur-signature.webp" alt="Logo ID.Quation aux couleurs Play Fair – horizontal couleur + signature"></div><figcaption><strong>ID.Quation × Play Fair – horizontal couleur + signature</strong><br><code>play-fair/idquation-play-fair-horizontal-couleur-signature.webp</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--sombre"><img src="../assets/logos/play-fair/idquation-play-fair-horizontal-fond-sombre-signature.webp" alt="Logo ID.Quation aux couleurs Play Fair – fond sombre + signature"></div><figcaption><strong>ID.Quation × Play Fair – fond sombre + signature</strong><br><code>play-fair/idquation-play-fair-horizontal-fond-sombre-signature.webp</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond"><img src="../assets/logos/play-fair/idquation-play-fair-icone.webp" alt="Logo ID.Quation aux couleurs Play Fair – icône seule"></div><figcaption><strong>ID.Quation × Play Fair – icône seule</strong><br><code>play-fair/idquation-play-fair-icone.webp</code></figcaption></figure>
+      </div>
+      <h4><span class="pilule pilule--form">Play Form</span> La santé augmentée</h4>
+      <div class="grille" style="margin-bottom: var(--espace-3)">
+        <figure class="ds-logo"><div class="ds-logo-fond"><img src="../assets/logos/play-form/idquation-play-form-horizontal-couleur-signature.webp" alt="Logo ID.Quation aux couleurs Play Form – horizontal couleur + signature"></div><figcaption><strong>ID.Quation × Play Form – horizontal couleur + signature</strong><br><code>play-form/idquation-play-form-horizontal-couleur-signature.webp</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--sombre"><img src="../assets/logos/play-form/idquation-play-form-horizontal-fond-sombre-signature.webp" alt="Logo ID.Quation aux couleurs Play Form – fond sombre + signature"></div><figcaption><strong>ID.Quation × Play Form – fond sombre + signature</strong><br><code>play-form/idquation-play-form-horizontal-fond-sombre-signature.webp</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond"><img src="../assets/logos/play-form/idquation-play-form-icone.webp" alt="Logo ID.Quation aux couleurs Play Form – icône seule"></div><figcaption><strong>ID.Quation × Play Form – icône seule</strong><br><code>play-form/idquation-play-form-icone.webp</code></figcaption></figure>
+      </div>
+      <h4><span class="pilule pilule--zen">Play Zen</span> La sérénité augmentée</h4>
+      <div class="grille" style="margin-bottom: var(--espace-3)">
+        <figure class="ds-logo"><div class="ds-logo-fond"><img src="../assets/logos/play-zen/idquation-play-zen-horizontal-couleur-signature.webp" alt="Logo ID.Quation aux couleurs Play Zen – horizontal couleur + signature"></div><figcaption><strong>ID.Quation × Play Zen – horizontal couleur + signature</strong><br><code>play-zen/idquation-play-zen-horizontal-couleur-signature.webp</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond ds-logo-fond--sombre"><img src="../assets/logos/play-zen/idquation-play-zen-horizontal-fond-sombre-signature.webp" alt="Logo ID.Quation aux couleurs Play Zen – fond sombre + signature"></div><figcaption><strong>ID.Quation × Play Zen – fond sombre + signature</strong><br><code>play-zen/idquation-play-zen-horizontal-fond-sombre-signature.webp</code></figcaption></figure>
+        <figure class="ds-logo"><div class="ds-logo-fond"><img src="../assets/logos/play-zen/idquation-play-zen-icone.webp" alt="Logo ID.Quation aux couleurs Play Zen – icône seule"></div><figcaption><strong>ID.Quation × Play Zen – icône seule</strong><br><code>play-zen/idquation-play-zen-icone.webp</code></figcaption></figure>
+      </div>
+    </section>
+
+    <!-- Logo animé -->
+    <section class="ds-bloc" id="logo-anime">
+      <h2>Logo animé</h2>
+      <p class="texte-doux">Intro et outro pour ouvrir et fermer une vidéo (ou un écran d'accueil animé). Fichiers dans <code>assets/videos/</code>, format 1920×1080.</p>
+      <div class="grille" style="margin-bottom: var(--espace-3)">
+        <figure class="ds-logo"><video src="../assets/videos/idquation-logo-anime-debut-musique.mp4" poster="../assets/videos/idquation-logo-anime-debut-apercu.jpg" controls playsinline preload="metadata"></video><figcaption><strong>Intro avec musique</strong> · 5 s<br><code>idquation-logo-anime-debut-musique.mp4</code></figcaption></figure>
+        <figure class="ds-logo"><video src="../assets/videos/idquation-logo-anime-fin-musique.mp4" poster="../assets/videos/idquation-logo-anime-fin-apercu.jpg" controls playsinline preload="metadata"></video><figcaption><strong>Outro avec musique</strong> · 2 s<br><code>idquation-logo-anime-fin-musique.mp4</code></figcaption></figure>
+      </div>
+      <p class="texte-doux">Aussi disponibles : versions <strong>muettes</strong> (<code>…-debut-muet.mp4</code>, <code>…-fin-muet.mp4</code>) et fichiers <strong>originaux</strong> pour le montage vidéo (<code>assets/videos/originaux/</code>, format .mov).</p>
+      <h3 style="margin-top: var(--espace-5)">Logo en filigrane sur les vidéos</h3>
+      <p class="texte-doux">Sur les vidéos <strong>uniquement</strong>, toujours <strong>en haut à droite</strong>. Fichier&nbsp;: <code>assets/logos/idquation-filigrane-video.png</code>.</p>
+      <div class="video-cadre" style="max-width: 560px; margin-bottom: var(--espace-3)"><div class="ds-video-exemple">Ta vidéo ici</div><img class="filigrane" src="../assets/logos/idquation-filigrane-video.png" alt="ID.Quation"></div>
+      <pre class="ds-code">&lt;div class="video-cadre"&gt;
+  &lt;video src="ma-video.mp4" controls playsinline&gt;&lt;/video&gt;
+  &lt;img class="filigrane" src="../assets/logos/idquation-filigrane-video.png" alt="ID.Quation"&gt;
+&lt;/div&gt;</pre>
+      <h3 style="margin-top: var(--espace-5)">Utiliser le logo animé</h3>
+      <pre class="ds-code">&lt;video src="../assets/videos/idquation-logo-anime-debut-musique.mp4" controls playsinline&gt;&lt;/video&gt;
+&lt;!-- lecture automatique : utiliser la version muette --&gt;
+&lt;video src="../assets/videos/idquation-logo-anime-debut-muet.mp4" autoplay muted playsinline&gt;&lt;/video&gt;</pre>
+    </section>
+
+    <!-- Couleurs -->
+    <section class="ds-bloc" id="couleurs">
+      <h2>Couleurs</h2>
+      <p class="texte-doux">Valeurs officielles de la charte (<code>docs/charte-logos-idquation-2021.pdf</code>).</p>
+      <h3>Principales</h3>
+      <div class="grille" style="margin-bottom: var(--espace-5)">
+        <div class="ds-pastille"><div class="couleur" style="background: var(--idq-rouge);"></div><div class="infos"><strong>Rouge ID.Quation</strong><br><code>--idq-rouge · #E72F47</code><br><span class="texte-doux" style="font-size: var(--taille-xs)">CMJN 0/90/65/0 · Pantone 192</span></div></div>
+        <div class="ds-pastille"><div class="couleur" style="background: var(--idq-noir);"></div><div class="infos"><strong>Noir de marque</strong><br><code>--idq-noir · #220000</code><br><span class="texte-doux" style="font-size: var(--taille-xs)">CMJN 0/90/65/100 · Pantone Black 6</span></div></div>
+        <div class="ds-pastille"><div class="couleur" style="background: var(--idq-brun);"></div><div class="infos"><strong>Brun gamme Play</strong><br><code>--idq-brun · #3B312F</code><br><span class="texte-doux" style="font-size: var(--taille-xs)">CMJN 0/30/20/90 · Pantone Black 7C</span></div></div>
+        <div class="ds-pastille"><div class="couleur" style="background: var(--idq-creme); border-bottom: 1px solid var(--idq-bordure);"></div><div class="infos"><strong>Crème (fond de page)</strong><br><code>--idq-creme · #F6F1ED</code><br><span class="texte-doux" style="font-size: var(--taille-xs)">Hors charte : fond neutre</span></div></div>
+      </div>
+      <h3>Gamme Play</h3>
+      <div class="grille" style="margin-bottom: var(--espace-5)">
+        <div class="ds-pastille"><div class="couleur" style="background: var(--play-safe);"></div><div class="infos"><strong>Play Safe</strong><br><code>--play-safe · #6EACAD</code><br><span class="texte-doux" style="font-size: var(--taille-xs)">Pantone 563</span></div></div>
+        <div class="ds-pastille"><div class="couleur" style="background: var(--play-form);"></div><div class="infos"><strong>Play Form</strong><br><code>--play-form · #D38B77</code><br><span class="texte-doux" style="font-size: var(--taille-xs)">Pantone 7416</span></div></div>
+        <div class="ds-pastille"><div class="couleur" style="background: var(--play-fair);"></div><div class="infos"><strong>Play Fair</strong><br><code>--play-fair · #8892A0</code><br><span class="texte-doux" style="font-size: var(--taille-xs)">Pantone 7544</span></div></div>
+        <div class="ds-pastille"><div class="couleur" style="background: var(--play-zen);"></div><div class="infos"><strong>Play Zen</strong><br><code>--play-zen · #C1BDB2</code><br><span class="texte-doux" style="font-size: var(--taille-xs)">Pantone 7535</span></div></div>
+      </div>
+      <h3>Secondaires (touches ludiques)</h3>
+      <div class="grille">
+        <div class="ds-pastille"><div class="couleur" style="background: var(--idq-vert);"></div><div class="infos"><strong>Vert</strong><br><code>--idq-vert · #9EB261</code></div></div>
+        <div class="ds-pastille"><div class="couleur" style="background: var(--idq-jaune);"></div><div class="infos"><strong>Jaune</strong><br><code>--idq-jaune · #F1CB65</code></div></div>
+        <div class="ds-pastille"><div class="couleur" style="background: var(--idq-orange);"></div><div class="infos"><strong>Orange</strong><br><code>--idq-orange · #DB7F43</code></div></div>
+        <div class="ds-pastille"><div class="couleur" style="background: var(--idq-framboise);"></div><div class="infos"><strong>Framboise</strong><br><code>--idq-framboise · #C44A74</code></div></div>
+        <div class="ds-pastille"><div class="couleur" style="background: var(--idq-violet);"></div><div class="infos"><strong>Violet</strong><br><code>--idq-violet · #886496</code></div></div>
+      </div>
+    </section>
+
+    <!-- Typographie -->
+    <section class="ds-bloc" id="typo">
+      <h2>Typographie</h2>
+      <div class="ds-demo">
+        <h1>Titre 1 — Boston</h1>
+        <h2>Titre 2 — On forme des responsables</h2>
+        <h3>Titre 3 — La sécurité augmentée</h3>
+        <p>Texte courant en Boston. On transforme les règles en réflexes et la formation en expérience humaine et ludique.</p>
+        <p>Mot important <span class="surligne">surligné en jaune</span>, <span class="texte-rouge">texte rouge</span>, <span class="texte-doux">texte doux</span>, <a href="#typo">un lien</a>.</p>
+      </div>
+      <figure class="ds-logo" style="max-width: 560px; margin-bottom: var(--espace-4)"><div class="ds-logo-fond" style="height: auto; padding: var(--espace-4)"><img src="../assets/typo/diazo-apercu.webp" alt="Aperçu de la police Diazo MVB Ex Cond, Regular et Black"></div><figcaption><strong>Diazo MVB Ex Cond</strong> — aperçu (image tirée de la charte). Dans les prototypes, elle est chargée par le projet web Adobe Fonts.</figcaption></figure>
+      <p class="accroche" style="font-size: var(--taille-xl); color: var(--idq-rouge); margin-bottom: var(--espace-2)">Accroche en Diazo lisse&nbsp;!</p>
+      <p class="accroche accroche--texture" style="font-size: var(--taille-xxl); color: var(--idq-rouge)">Gros titre texturé&nbsp;!</p>
+      <pre class="ds-code">&lt;p class="accroche"&gt;Accroche lisse&lt;/p&gt;
+&lt;h1 class="accroche accroche--texture"&gt;Gros titre texturé&lt;/h1&gt;</pre>
+      <p class="texte-doux">Deux polices autorisées&nbsp;: <strong>Boston</strong> (titres et texte) et <strong>Diazo MVB Ex Cond</strong> en deux versions&nbsp;: lisse pour les accroches (classe <code>accroche</code>), texturée pour les gros titres ludiques (<code>accroche accroche--texture</code>). Elles s'affichent si elles sont installées sur l'ordinateur (licences poste de travail). Signature «&nbsp;Valeur humaine augmentée&nbsp;»&nbsp;: <strong>Domus</strong> (Adobe Fonts).</p>
+    </section>
+
+    <!-- Espaces -->
+    <section class="ds-bloc" id="espaces">
+      <h2>Espaces &amp; formes</h2>
+      <div class="ds-demo pile">
+        <div class="ligne"><code style="width: 110px">--espace-2</code><div class="ds-espace" style="width: 8px"></div> 8 px</div>
+        <div class="ligne"><code style="width: 110px">--espace-4</code><div class="ds-espace" style="width: 16px"></div> 16 px</div>
+        <div class="ligne"><code style="width: 110px">--espace-5</code><div class="ds-espace" style="width: 24px"></div> 24 px</div>
+        <div class="ligne"><code style="width: 110px">--espace-7</code><div class="ds-espace" style="width: 48px"></div> 48 px</div>
+        <div class="ligne"><code style="width: 110px">--espace-8</code><div class="ds-espace" style="width: 64px"></div> 64 px</div>
+      </div>
+      <div class="ds-demo ligne">
+        <div style="width: 80px; height: 80px; background: var(--idq-lavande); border-radius: var(--arrondi-s)"></div>
+        <div style="width: 80px; height: 80px; background: var(--idq-lavande); border-radius: var(--arrondi-m)"></div>
+        <div style="width: 80px; height: 80px; background: var(--idq-lavande); border-radius: var(--arrondi-l)"></div>
+        <div style="width: 160px; height: 80px; background: var(--idq-lavande); border-radius: var(--arrondi-pilule)"></div>
+      </div>
+      <p class="texte-doux">Arrondis&nbsp;: <code>--arrondi-s</code>, <code>-m</code>, <code>-l</code>, <code>-pilule</code>. Dans le doute, on arrondit&nbsp;!</p>
+    </section>
+
+    <!-- Boutons -->
+    <section class="ds-bloc" id="boutons">
+      <h2>Boutons</h2>
+      <div class="ds-demo ligne">
+        <button class="bouton">C'est parti&nbsp;!</button>
+        <button class="bouton bouton--secondaire">Plus tard</button>
+        <button class="bouton bouton--sombre">Valider</button>
+        <button class="bouton bouton--jaune">Jouer 🎲</button>
+        <button class="bouton bouton--discret">Annuler</button>
+        <button class="bouton" disabled>Désactivé</button>
+      </div>
+      <div class="ds-demo ligne">
+        <button class="bouton bouton--petit">Petit</button>
+        <button class="bouton">Normal</button>
+        <button class="bouton bouton--grand">Grand</button>
+      </div>
+      <pre class="ds-code">&lt;button class="bouton"&gt;C'est parti !&lt;/button&gt;
+&lt;button class="bouton bouton--secondaire"&gt;Plus tard&lt;/button&gt;
+&lt;button class="bouton bouton--jaune bouton--grand"&gt;Jouer&lt;/button&gt;</pre>
+    </section>
+
+    <!-- Pilules -->
+    <section class="ds-bloc" id="pilules">
+      <h2>Pilules, étiquettes &amp; badges</h2>
+      <div class="ds-demo ligne">
+        <span class="pilule">Nouveau</span>
+        <span class="pilule pilule--rouge">À la une</span>
+        <span class="pilule pilule--jaune">Ludique</span>
+        <span class="pilule pilule--safe">Play Safe</span>
+        <span class="pilule pilule--form">Play Form</span>
+        <span class="pilule pilule--fair">Play Fair</span>
+        <span class="pilule pilule--zen">Play Zen</span>
+        <span class="pilule pilule--vert">Vert</span>
+        <span class="pilule pilule--orange">Orange</span>
+        <span class="pilule pilule--framboise">Framboise</span>
+        <span class="pilule pilule--violet">Violet</span>
+        <span class="pilule pilule--contour">Contour</span>
+        <span class="badge">3</span>
+        <span class="avatar">PL</span>
+      </div>
+      <pre class="ds-code">&lt;span class="pilule pilule--safe"&gt;Play Safe&lt;/span&gt;
+&lt;span class="badge"&gt;3&lt;/span&gt;
+&lt;span class="avatar"&gt;PL&lt;/span&gt;</pre>
+    </section>
+
+    <!-- Cartes -->
+    <section class="ds-bloc" id="cartes">
+      <h2>Cartes</h2>
+      <h3>Pleines, aux couleurs de la gamme</h3>
+      <div class="grille" style="margin-bottom: var(--espace-5)">
+        <article class="carte carte--safe"><h3>Play Safe</h3><p>La sécurité augmentée</p></article>
+        <article class="carte carte--form"><h3>Play Form</h3><p>La santé augmentée</p></article>
+        <article class="carte carte--fair"><h3>Play Fair</h3><p>La relation augmentée</p></article>
+        <article class="carte carte--zen"><h3>Play Zen</h3><p>La sérénité augmentée</p></article>
+      </div>
+      <h3>Blanches, avec un trait de couleur</h3>
+      <div class="grille" style="margin-bottom: var(--espace-3)">
+        <article class="carte carte--trait-safe carte--cliquable">
+          <span class="pilule pilule--safe">Module 1</span>
+          <h3 style="margin-top: var(--espace-3)">Les bons gestes</h3>
+          <p class="texte-doux">10 min · 5 questions</p>
+        </article>
+        <article class="carte carte--trait-form carte--cliquable">
+          <span class="pilule pilule--form">Module 2</span>
+          <h3 style="margin-top: var(--espace-3)">Dos en forme</h3>
+          <p class="texte-doux">8 min · 4 questions</p>
+        </article>
+        <article class="carte carte--trait-zen carte--cliquable">
+          <span class="pilule pilule--zen">Module 3</span>
+          <h3 style="margin-top: var(--espace-3)">Pause sérénité</h3>
+          <p class="texte-doux">5 min · 3 questions</p>
+        </article>
+      </div>
+      <pre class="ds-code">&lt;article class="carte carte--safe"&gt;...&lt;/article&gt;
+&lt;article class="carte carte--trait-safe carte--cliquable"&gt;...&lt;/article&gt;</pre>
+    </section>
+
+    <!-- Formulaires -->
+    <section class="ds-bloc" id="formulaires">
+      <h2>Formulaires</h2>
+      <div class="ds-demo">
+        <div class="champ">
+          <label for="ds-prenom">Ton prénom</label>
+          <input class="saisie" id="ds-prenom" type="text" placeholder="Ex. Camille">
+          <span class="aide">Juste pour te dire bonjour 😊</span>
+        </div>
+        <div class="champ">
+          <label for="ds-equipe">Ton équipe</label>
+          <select class="saisie" id="ds-equipe">
+            <option>Atelier</option>
+            <option>Logistique</option>
+            <option>Bureau</option>
+          </select>
+        </div>
+        <div class="champ">
+          <label for="ds-idee">Une idée pour ton équipe&nbsp;?</label>
+          <textarea class="saisie" id="ds-idee" placeholder="Toutes les idées sont bonnes à prendre"></textarea>
+        </div>
+        <div class="ligne">
+          <label class="case"><input type="checkbox" checked> J'ai lu les consignes</label>
+          <label class="interrupteur"><input type="checkbox" checked><span class="piste"></span> Notifications</label>
+        </div>
+      </div>
+      <pre class="ds-code">&lt;div class="champ"&gt;
+  &lt;label for="prenom"&gt;Ton prénom&lt;/label&gt;
+  &lt;input class="saisie" id="prenom" type="text"&gt;
+&lt;/div&gt;
+&lt;label class="interrupteur"&gt;&lt;input type="checkbox"&gt;&lt;span class="piste"&gt;&lt;/span&gt; Notifications&lt;/label&gt;</pre>
+    </section>
+
+    <!-- Choix / Quiz -->
+    <section class="ds-bloc" id="choix">
+      <h2>Choix de réponse (quiz)</h2>
+      <div class="ds-demo pile">
+        <h3>Avant de soulever une charge lourde, je…</h3>
+        <button class="choix">A · Je fonce, ça ira vite</button>
+        <button class="choix choix--juste">B · Je plie les jambes et garde le dos droit ✅</button>
+        <button class="choix choix--a-revoir">C · Je me penche en avant</button>
+        <button class="choix choix--selectionne">D · Je demande un coup de main</button>
+      </div>
+      <pre class="ds-code">&lt;button class="choix"&gt;Réponse&lt;/button&gt;
+&lt;!-- états : choix--selectionne, choix--juste, choix--a-revoir --&gt;</pre>
+    </section>
+
+    <!-- Alertes -->
+    <section class="ds-bloc" id="alertes">
+      <h2>Messages</h2>
+      <p class="texte-doux">Toujours bienveillants&nbsp;: on encourage, on ne culpabilise jamais.</p>
+      <div class="pile" style="margin-bottom: var(--espace-3)">
+        <div class="alerte alerte--bravo"><span class="emoji">🎉</span><p><strong>Bravo&nbsp;!</strong> Tu as le bon réflexe.</p></div>
+        <div class="alerte alerte--astuce"><span class="emoji">💡</span><p><strong>Astuce</strong> — Une pause de 2 minutes toutes les heures, ça change tout.</p></div>
+        <div class="alerte alerte--vigilance"><span class="emoji">👀</span><p><strong>Petit point de vigilance</strong> — On regarde ensemble la bonne posture&nbsp;?</p></div>
+        <div class="alerte"><span class="emoji">ℹ️</span><p>Le module dure environ 10 minutes.</p></div>
+      </div>
+      <p><span class="bulle">Bonjour&nbsp;! Prêt·e à prototyper&nbsp;? 😊</span></p>
+      <pre class="ds-code">&lt;div class="alerte alerte--bravo"&gt;&lt;span class="emoji"&gt;🎉&lt;/span&gt;&lt;p&gt;Bravo !&lt;/p&gt;&lt;/div&gt;
+&lt;!-- variantes : alerte--bravo, alerte--astuce, alerte--vigilance --&gt;
+&lt;span class="bulle"&gt;Bonjour !&lt;/span&gt;</pre>
+    </section>
+
+    <!-- Progression -->
+    <section class="ds-bloc" id="progression">
+      <h2>Progression &amp; score</h2>
+      <div class="ds-demo pile">
+        <div class="progression"><span style="width: 65%"></span></div>
+        <div class="progression progression--safe"><span style="width: 40%"></span></div>
+        <ol class="etapes"><li class="faite"></li><li class="faite"></li><li class="en-cours"></li><li></li><li></li></ol>
+        <div class="ligne"><div class="score">8/10<small>Super&nbsp;!</small></div></div>
+      </div>
+      <pre class="ds-code">&lt;div class="progression"&gt;&lt;span style="width: 65%"&gt;&lt;/span&gt;&lt;/div&gt;
+&lt;ol class="etapes"&gt;&lt;li class="faite"&gt;&lt;/li&gt;&lt;li class="en-cours"&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;/ol&gt;
+&lt;div class="score"&gt;8/10&lt;small&gt;Super !&lt;/small&gt;&lt;/div&gt;</pre>
+    </section>
+
+    <!-- Ton -->
+    <section class="ds-bloc" id="ton">
+      <h2>Ton de marque</h2>
+      <div class="grille">
+        <div class="carte carte--trait-safe">
+          <h3>✅ On écrit</h3>
+          <p>« Bravo, tu as le bon réflexe&nbsp;! »</p>
+          <p>« On regarde ensemble&nbsp;? »</p>
+          <p>« Formons des responsables. »</p>
+        </div>
+        <div class="carte carte--trait-form">
+          <h3>🙅 On évite</h3>
+          <p>« Erreur&nbsp;! Réponse fausse. »</p>
+          <p>« Attention, danger&nbsp;! »</p>
+          <p>« Qui est le coupable&nbsp;? »</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pied">
+    <p>Ne cherchons plus les coupables, formons des responsables.</p>
+  </footer>
+</body>
+</html>

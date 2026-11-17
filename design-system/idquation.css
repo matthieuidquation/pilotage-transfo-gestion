@@ -1,0 +1,504 @@
+/* ==========================================================================
+   Design system ID.Quation — « Valeur humaine augmentée »
+   --------------------------------------------------------------------------
+   Une seule feuille de style à brancher dans chaque prototype :
+   <link rel="stylesheet" href="../design-system/idquation.css">
+   Catalogue des composants : design-system/index.html
+   Couleurs et polices : charte officielle (docs/charte-logos-idquation-2021.pdf).
+   ========================================================================== */
+
+/* 1. Jetons (tokens) — les valeurs de base de la marque
+   Source : charte officielle docs/charte-logos-idquation-2021.pdf
+   ========================================================================== */
+:root {
+  /* Couleurs principales (charte p. 6) */
+  --idq-rouge: #E72F47;        /* CMJN 0/90/65/0 · Pantone 192 (rendu écran des logos) */
+  --idq-noir: #220000;         /* CMJN 0/90/65/100 · Pantone Black 6 */
+  --idq-brun: #3B312F;         /* Brun de la gamme Play · Pantone Black 7C */
+  --idq-blanc: #FFFFFF;
+  --idq-creme: #F6F1ED;        /* Fond de page (hors charte, neutre chaud) */
+
+  /* Gamme Play (charte p. 11) */
+  --play-safe: #6EACAD;        /* Pantone 563 */
+  --play-form: #D38B77;        /* Pantone 7416 */
+  --play-fair: #8892A0;        /* Pantone 7544 */
+  --play-zen: #C1BDB2;         /* Pantone 7535 */
+
+  /* Couleurs secondaires (charte p. 7) — touches ludiques */
+  --idq-vert: #9EB261;
+  --idq-jaune: #F1CB65;
+  --idq-orange: #DB7F43;
+  --idq-framboise: #C44A74;
+  --idq-violet: #886496;
+  --idq-lavande: #CDBBD6;      /* Violet secondaire éclairci (étiquettes) */
+
+  /* Nuances dérivées (fonds doux, bordures) */
+  --idq-rouge-fonce: #C8253B;
+  --idq-rouge-doux: #FBE0E4;
+  --idq-jaune-doux: #FCF2D6;
+  --idq-lavande-doux: #F1EAF4;
+  --idq-vert-doux: #ECF0DF;
+  --play-safe-doux: #E2EEEE;
+  --play-form-doux: #F6E8E4;
+  --play-fair-doux: #E7E9EC;
+  --play-zen-doux: #F3F2EF;
+  --idq-gris: #6B6260;
+  --idq-bordure: #E4DCD5;
+
+  /* Typographie — Boston (titres, texte) et Diazo (accroches) uniquement */
+  --police-titre: "Boston", sans-serif;
+  --police-texte: "Boston", sans-serif;
+  --police-accroche: "diazo-mvb-ex-cond", "Boston", sans-serif;
+  --police-accroche-texture: "diazo-mvb-rough1-ex-cond", "diazo-mvb-ex-cond", "Boston", sans-serif;
+
+  --taille-xs: 0.8rem;
+  --taille-s: 0.9rem;
+  --taille-m: 1rem;
+  --taille-l: 1.25rem;
+  --taille-xl: 1.75rem;
+  --taille-xxl: clamp(2rem, 5vw, 3rem);
+
+  /* Espacements (multiples de 4 px) */
+  --espace-1: 4px;
+  --espace-2: 8px;
+  --espace-3: 12px;
+  --espace-4: 16px;
+  --espace-5: 24px;
+  --espace-6: 32px;
+  --espace-7: 48px;
+  --espace-8: 64px;
+
+  /* Formes arrondies — l'esprit « pilule » de la marque */
+  --arrondi-s: 8px;
+  --arrondi-m: 16px;
+  --arrondi-l: 24px;
+  --arrondi-pilule: 999px;
+
+  /* Ombres légères */
+  --ombre-douce: 0 2px 8px rgba(34, 0, 0, 0.06);
+  --ombre-relief: 0 8px 24px rgba(34, 0, 0, 0.10);
+
+  --transition: 160ms ease;
+  --largeur-page: 960px;
+}
+
+/* Polices autorisées : Boston et Diazo MVB Ex Cond — uniquement.
+   ⚠️ Licence Boston (Monotype, poste de travail) : les fichiers de police ne
+   doivent PAS être mis dans le dépôt ni sur un serveur. La police est utilisée
+   si elle est installée sur l'ordinateur (local()). Voir CLAUDE.md §3. */
+@font-face {
+  font-family: "Boston";
+  src: local("Boston Regular"), local("Boston-Regular");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Boston";
+  src: local("Boston Regular It"), local("Boston-RegularIt");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Boston";
+  src: local("Boston SemiBold"), local("Boston-SemiBold");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Boston";
+  src: local("Boston Bold"), local("Boston-Bold");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Boston";
+  src: local("Boston Black"), local("Boston-Black");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Boston";
+  src: local("Boston Heavy"), local("Boston-Heavy");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+/* Diazo MVB Ex Cond : chargée par le projet web Adobe Fonts ID.Quation
+   (<link rel="stylesheet" href="https://use.typekit.net/hhx4iux.css"> dans le <head>). */
+
+
+/* 2. Base
+   ========================================================================== */
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  background: var(--idq-creme);
+  color: var(--idq-noir);
+  font-family: var(--police-texte);
+  font-size: var(--taille-m);
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, .titre {
+  font-family: var(--police-titre);
+  font-weight: 800;
+  line-height: 1.2;
+  margin: 0 0 var(--espace-3);
+}
+h1 { font-size: var(--taille-xxl); }
+h2 { font-size: var(--taille-xl); }
+h3 { font-size: var(--taille-l); }
+h4 { font-size: var(--taille-m); font-weight: 600; }
+
+p { margin: 0 0 var(--espace-4); }
+a { color: var(--idq-rouge); font-weight: 600; }
+a:hover { color: var(--idq-rouge-fonce); }
+
+:focus-visible {
+  outline: 3px solid var(--idq-jaune);
+  outline-offset: 2px;
+}
+
+/* Accroche en Diazo (police secondaire de la charte) */
+.accroche {
+  font-family: var(--police-accroche);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 1.05;
+}
+
+/* Variante texturée (effet tampon, comme l'aperçu de la charte) pour les gros titres ludiques */
+.accroche--texture { font-family: var(--police-accroche-texture); }
+
+.surligne {
+  background: linear-gradient(transparent 55%, var(--idq-jaune) 55%);
+  padding: 0 2px;
+}
+.texte-doux { color: var(--idq-gris); }
+.texte-rouge { color: var(--idq-rouge); }
+
+/* 3. Mise en page
+   ========================================================================== */
+.conteneur {
+  max-width: var(--largeur-page);
+  margin: 0 auto;
+  padding: 0 var(--espace-4);
+}
+.section { padding: var(--espace-7) 0; }
+
+.grille {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--espace-4);
+}
+.pile { display: flex; flex-direction: column; gap: var(--espace-3); }
+.ligne { display: flex; flex-wrap: wrap; align-items: center; gap: var(--espace-3); }
+
+/* 4. En-tête et pied de page
+   ========================================================================== */
+.entete {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espace-4);
+  max-width: var(--largeur-page);
+  margin: 0 auto;
+  padding: var(--espace-5) var(--espace-4);
+}
+.logo {
+  font-family: var(--police-titre);
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: var(--idq-rouge);
+  text-decoration: none;
+}
+/* Logo image (fichiers dans assets/logos/) */
+.logo img { display: block; height: 56px; width: auto; }
+.logo--grand img { height: 120px; }
+.pied {
+  text-align: center;
+  padding: var(--espace-6) var(--espace-4);
+  font-style: italic;
+  color: var(--idq-gris);
+}
+
+/* 5. Boutons
+   ========================================================================== */
+.bouton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espace-2);
+  background: var(--idq-rouge);
+  color: var(--idq-blanc);
+  border: 2px solid var(--idq-rouge);
+  border-radius: var(--arrondi-pilule);
+  padding: var(--espace-3) var(--espace-5);
+  font: 600 var(--taille-m) var(--police-texte);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition);
+}
+.bouton:hover { background: var(--idq-rouge-fonce); border-color: var(--idq-rouge-fonce); color: var(--idq-blanc); }
+.bouton:active { transform: scale(0.97); }
+.bouton:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+
+.bouton--secondaire { background: transparent; color: var(--idq-rouge); }
+.bouton--secondaire:hover { background: var(--idq-rouge-doux); color: var(--idq-rouge-fonce); }
+
+.bouton--sombre { background: var(--idq-noir); border-color: var(--idq-noir); }
+.bouton--sombre:hover { background: var(--idq-brun); border-color: var(--idq-brun); }
+
+.bouton--jaune { background: var(--idq-jaune); border-color: var(--idq-jaune); color: var(--idq-noir); }
+.bouton--jaune:hover { background: #E8BC45; border-color: #E8BC45; color: var(--idq-noir); }
+
+.bouton--discret { background: transparent; border-color: transparent; color: var(--idq-noir); }
+.bouton--discret:hover { background: var(--idq-bordure); border-color: var(--idq-bordure); color: var(--idq-noir); }
+
+.bouton--petit { padding: var(--espace-1) var(--espace-4); font-size: var(--taille-s); }
+.bouton--grand { padding: var(--espace-4) var(--espace-6); font-size: var(--taille-l); }
+
+/* 6. Pilules, étiquettes et badges
+   ========================================================================== */
+.pilule {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espace-1);
+  background: var(--idq-lavande);
+  color: var(--idq-noir);
+  border-radius: var(--arrondi-pilule);
+  padding: var(--espace-1) 14px;
+  font-size: var(--taille-s);
+  font-weight: 600;
+}
+.pilule--rouge { background: var(--idq-rouge); color: var(--idq-blanc); }
+.pilule--jaune { background: var(--idq-jaune); }
+.pilule--safe  { background: var(--play-safe); color: var(--idq-brun); }
+.pilule--form  { background: var(--play-form); color: var(--idq-brun); }
+.pilule--fair  { background: var(--play-fair); color: var(--idq-brun); }
+.pilule--zen   { background: var(--play-zen); color: var(--idq-brun); }
+.pilule--contour { background: transparent; border: 2px solid currentColor; }
+/* Couleurs secondaires de la charte */
+.pilule--vert      { background: var(--idq-vert); color: var(--idq-brun); }
+.pilule--orange    { background: var(--idq-orange); color: var(--idq-blanc); }
+.pilule--framboise { background: var(--idq-framboise); color: var(--idq-blanc); }
+.pilule--violet    { background: var(--idq-violet); color: var(--idq-blanc); }
+
+.badge {
+  display: inline-grid;
+  place-items: center;
+  min-width: 24px;
+  height: 24px;
+  padding: 0 var(--espace-2);
+  border-radius: var(--arrondi-pilule);
+  background: var(--idq-rouge);
+  color: var(--idq-blanc);
+  font-size: var(--taille-xs);
+  font-weight: 600;
+}
+
+/* 7. Cartes
+   ========================================================================== */
+.carte {
+  background: var(--idq-blanc);
+  border-radius: var(--arrondi-l);
+  padding: var(--espace-5);
+  box-shadow: var(--ombre-douce);
+}
+.carte > :last-child { margin-bottom: 0; }
+.carte h2, .carte h3 { margin-bottom: var(--espace-1); }
+.carte--cliquable { cursor: pointer; transition: transform var(--transition), box-shadow var(--transition); }
+.carte--cliquable:hover { transform: translateY(-3px); box-shadow: var(--ombre-relief); }
+
+/* Cartes pleines aux couleurs de la gamme Play */
+.carte--safe { background: var(--play-safe); color: var(--idq-brun); }
+.carte--form { background: var(--play-form); color: var(--idq-brun); }
+.carte--fair { background: var(--play-fair); color: var(--idq-brun); }
+.carte--zen  { background: var(--play-zen); color: var(--idq-brun); }
+.carte--rouge { background: var(--idq-rouge); color: var(--idq-blanc); }
+
+/* Cartes douces avec liseré coloré */
+.carte--trait-safe { border-top: 6px solid var(--play-safe); }
+.carte--trait-form { border-top: 6px solid var(--play-form); }
+.carte--trait-fair { border-top: 6px solid var(--play-fair); }
+.carte--trait-zen  { border-top: 6px solid var(--play-zen); }
+
+/* 8. Formulaires
+   ========================================================================== */
+.champ { display: flex; flex-direction: column; gap: var(--espace-1); margin-bottom: var(--espace-4); }
+.champ label { font-weight: 600; font-size: var(--taille-s); }
+.champ .aide { font-size: var(--taille-xs); color: var(--idq-gris); }
+
+.saisie {
+  width: 100%;
+  background: var(--idq-blanc);
+  color: var(--idq-noir);
+  border: 2px solid var(--idq-bordure);
+  border-radius: var(--arrondi-m);
+  padding: var(--espace-3) var(--espace-4);
+  font: 400 var(--taille-m) var(--police-texte);
+  transition: border-color var(--transition);
+}
+.saisie:hover { border-color: var(--play-zen); }
+.saisie:focus { outline: none; border-color: var(--idq-rouge); }
+textarea.saisie { min-height: 110px; resize: vertical; }
+
+.case { display: inline-flex; align-items: center; gap: var(--espace-2); cursor: pointer; }
+.case input { width: 20px; height: 20px; accent-color: var(--idq-rouge); }
+
+/* Interrupteur on/off */
+.interrupteur { display: inline-flex; align-items: center; gap: var(--espace-3); cursor: pointer; }
+.interrupteur input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.interrupteur .piste {
+  position: relative;
+  width: 46px; height: 26px;
+  background: var(--idq-bordure);
+  border-radius: var(--arrondi-pilule);
+  transition: background var(--transition);
+}
+.interrupteur .piste::after {
+  content: "";
+  position: absolute; top: 3px; left: 3px;
+  width: 20px; height: 20px;
+  background: var(--idq-blanc);
+  border-radius: 50%;
+  box-shadow: var(--ombre-douce);
+  transition: transform var(--transition);
+}
+.interrupteur input:checked + .piste { background: var(--play-safe); }
+.interrupteur input:checked + .piste::after { transform: translateX(20px); }
+.interrupteur input:focus-visible + .piste { outline: 3px solid var(--idq-jaune); outline-offset: 2px; }
+
+/* 9. Choix de réponse (quiz, sondage) — grosses pilules cliquables
+   ========================================================================== */
+.choix {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-3);
+  width: 100%;
+  background: var(--idq-blanc);
+  color: var(--idq-noir);
+  border: 2px solid var(--idq-bordure);
+  border-radius: var(--arrondi-pilule);
+  padding: var(--espace-3) var(--espace-5);
+  font: 600 var(--taille-m) var(--police-texte);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition);
+}
+.choix:hover { border-color: var(--idq-noir); }
+.choix--selectionne { border-color: var(--idq-rouge); background: var(--idq-rouge-doux); }
+.choix--juste { border-color: var(--play-safe); background: var(--play-safe-doux); }
+.choix--a-revoir { border-color: var(--play-form); background: var(--play-form-doux); }
+
+/* 10. Messages et alertes — toujours bienveillants, jamais anxiogènes
+   ========================================================================== */
+.alerte {
+  display: flex;
+  gap: var(--espace-3);
+  align-items: flex-start;
+  border-radius: var(--arrondi-m);
+  padding: var(--espace-4) var(--espace-5);
+  background: var(--idq-lavande-doux);
+  border-left: 6px solid var(--idq-lavande);
+}
+.alerte > :last-child { margin-bottom: 0; }
+.alerte .emoji { font-size: 1.4rem; line-height: 1; }
+.alerte--bravo     { background: var(--play-safe-doux); border-color: var(--play-safe); }
+.alerte--astuce    { background: var(--idq-jaune-doux); border-color: var(--idq-jaune); }
+.alerte--vigilance { background: var(--play-form-doux); border-color: var(--play-form); }
+
+/* Bulle de message courte (comme le « Bonjour ! » du prototype) */
+.bulle {
+  display: inline-block;
+  background: var(--idq-jaune);
+  color: var(--idq-noir);
+  border-radius: var(--arrondi-pilule);
+  padding: 6px var(--espace-4);
+  font-weight: 600;
+}
+
+/* 11. Progression et score — côté ludique
+   ========================================================================== */
+.progression {
+  width: 100%;
+  height: 14px;
+  background: var(--idq-bordure);
+  border-radius: var(--arrondi-pilule);
+  overflow: hidden;
+}
+.progression > span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--idq-rouge);
+  border-radius: inherit;
+  transition: width 400ms ease;
+}
+.progression--safe > span { background: var(--play-safe); }
+.progression--jaune > span { background: var(--idq-jaune); }
+
+.etapes { display: flex; gap: var(--espace-2); list-style: none; padding: 0; margin: 0; }
+.etapes li {
+  flex: 1;
+  height: 8px;
+  border-radius: var(--arrondi-pilule);
+  background: var(--idq-bordure);
+}
+.etapes li.faite { background: var(--idq-rouge); }
+.etapes li.en-cours { background: var(--idq-jaune); }
+
+.score {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  background: var(--idq-jaune);
+  font-family: var(--police-titre);
+  font-weight: 700;
+  font-size: 2.2rem;
+  line-height: 1;
+}
+.score small { font-family: var(--police-texte); font-size: var(--taille-xs); font-weight: 600; margin-top: var(--espace-1); }
+
+/* 12. Avatar
+   ========================================================================== */
+.avatar {
+  display: inline-grid;
+  place-items: center;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--idq-lavande);
+  font-family: var(--police-titre);
+  font-weight: 700;
+}
+
+/* 13. Vidéo avec logo en filigrane (en haut à droite)
+   ========================================================================== */
+.video-cadre { position: relative; border-radius: var(--arrondi-m); overflow: hidden; }
+.video-cadre video, .video-cadre > img { display: block; width: 100%; }
+.video-cadre .filigrane {
+  position: absolute;
+  top: 4%;
+  right: 3%;
+  width: 18%;
+  height: auto;
+  pointer-events: none;
+}
+
+/* Petits écrans */
+@media (max-width: 600px) {
+  .section { padding: var(--espace-6) 0; }
+  .bouton--grand { width: 100%; }
+}
