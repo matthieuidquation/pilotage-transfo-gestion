@@ -3,38 +3,145 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Prototype ID.Quation</title>
+  <title>Feuille de route · Service gestion</title>
   <!-- Police Diazo : projet web Adobe Fonts ID.Quation -->
   <link rel="stylesheet" href="https://use.typekit.net/hhx4iux.css">
   <link rel="stylesheet" href="../design-system/idquation.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="entete">
-    <span class="logo"><img src="../assets/logos/idquation-horizontal-couleur.webp" alt="ID.Quation"></span>
-    <span class="pilule">Prototype</span>
+  <header class="entete entete--app">
+    <a class="logo" href="#/"><img src="../assets/logos/idquation-horizontal-couleur.webp" alt="ID.Quation"></a>
+    <nav class="nav" aria-label="Navigation principale">
+      <a href="#/" data-nav="accueil">Feuille de route</a>
+      <a href="#/synthese" data-nav="synthese">Synthèse</a>
+      <a href="#/responsables" data-nav="responsables">Responsables</a>
+    </nav>
+    <div class="ligne utilisateur">
+      <span class="pilule pilule--jaune" id="pilule-demo" title="Les données restent dans ce navigateur">Mode démo</span>
+      <label class="texte-doux" for="choix-utilisateur">Je suis</label>
+      <select id="choix-utilisateur" class="saisie saisie--compacte"></select>
+    </div>
   </header>
 
-  <main class="conteneur">
-    <section class="hero">
-      <h1>Bienvenue dans votre prototype&nbsp;!</h1>
-      <p>Valeur humaine augmentée. Décrivez votre idée à Claude, on la construit ensemble, pas à pas.</p>
-      <button id="bouton-sourire" class="bouton">Dire bonjour</button>
-      <p id="message" class="bulle" hidden></p>
-    </section>
-
-    <section class="gamme grille">
-      <article class="carte carte--safe"><h2>Play Safe</h2><p>La sécurité augmentée</p></article>
-      <article class="carte carte--form"><h2>Play Form</h2><p>La santé augmentée</p></article>
-      <article class="carte carte--fair"><h2>Play Fair</h2><p>La relation augmentée</p></article>
-      <article class="carte carte--zen"><h2>Play Zen</h2><p>La sérénité augmentée</p></article>
-    </section>
-  </main>
+  <main class="conteneur" id="vue" aria-live="polite"></main>
 
   <footer class="pied">
     <p>Ne cherchons plus les coupables, formons des responsables.</p>
+    <button class="bouton bouton--discret bouton--petit" id="reinitialiser">Réinitialiser la démo</button>
   </footer>
 
-  <script src="script.js"></script>
+  <!-- Fenêtre : objectif du service -->
+  <dialog id="dlg-objectif" class="fenetre">
+    <form method="dialog" class="pile">
+      <h2>L'objectif du service</h2>
+      <div class="champ">
+        <label for="f-ambition">Ambition</label>
+        <textarea id="f-ambition" class="saisie" required></textarea>
+      </div>
+      <div class="champ">
+        <label for="f-objectif-service">Objectif</label>
+        <textarea id="f-objectif-service" class="saisie" required></textarea>
+      </div>
+      <div class="ligne fenetre-boutons">
+        <button value="annuler" class="bouton bouton--discret" formnovalidate>Annuler</button>
+        <button value="valider" class="bouton">Enregistrer</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Fenêtre : brique -->
+  <dialog id="dlg-brique" class="fenetre">
+    <form method="dialog" class="pile">
+      <h2 id="dlg-brique-titre">Nouvelle brique</h2>
+      <div class="champ">
+        <label for="f-b-nom">Nom</label>
+        <input id="f-b-nom" class="saisie" required>
+      </div>
+      <div class="champ">
+        <label for="f-b-objectif">Objectif</label>
+        <textarea id="f-b-objectif" class="saisie"></textarea>
+      </div>
+      <div class="champ">
+        <span class="etiquette">Responsable(s)</span>
+        <div class="choix-pilules" data-responsables="brique"></div>
+      </div>
+      <div class="grille grille--2">
+        <div class="champ">
+          <label for="f-b-statut">Statut</label>
+          <select id="f-b-statut" class="saisie"></select>
+        </div>
+        <div class="champ">
+          <label for="f-b-priorite">Priorité</label>
+          <select id="f-b-priorite" class="saisie"></select>
+        </div>
+        <div class="champ">
+          <label for="f-b-debut">Début</label>
+          <input id="f-b-debut" type="date" class="saisie">
+        </div>
+        <div class="champ">
+          <label for="f-b-fin">Fin</label>
+          <input id="f-b-fin" type="date" class="saisie">
+        </div>
+      </div>
+      <label class="case"><input type="checkbox" id="f-b-continu"> En continu (la date de fin sert de repère)</label>
+      <div class="champ">
+        <label for="f-b-moyens">Moyens et ressources à mobiliser</label>
+        <textarea id="f-b-moyens" class="saisie"></textarea>
+      </div>
+      <p class="alerte alerte--vigilance" id="dlg-brique-erreur" hidden></p>
+      <div class="ligne fenetre-boutons">
+        <button value="annuler" class="bouton bouton--discret" formnovalidate>Annuler</button>
+        <button value="valider" class="bouton">Enregistrer</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Fenêtre : action -->
+  <dialog id="dlg-action" class="fenetre">
+    <form method="dialog" class="pile">
+      <h2 id="dlg-action-titre">Nouvelle action</h2>
+      <div class="champ">
+        <label for="f-a-intitule">Intitulé</label>
+        <textarea id="f-a-intitule" class="saisie saisie--courte" required></textarea>
+      </div>
+      <div class="champ">
+        <span class="etiquette">Responsable(s)</span>
+        <div class="choix-pilules" data-responsables="action"></div>
+      </div>
+      <div class="champ">
+        <label for="f-a-note">Précision sur les rôles <span class="aide">(facultatif : « Matthieu valide », « avec RBA »…)</span></label>
+        <input id="f-a-note" class="saisie">
+      </div>
+      <div class="grille grille--3">
+        <div class="champ">
+          <label for="f-a-echeance">Échéance</label>
+          <input id="f-a-echeance" type="date" class="saisie">
+        </div>
+        <div class="champ">
+          <label for="f-a-statut">Statut</label>
+          <select id="f-a-statut" class="saisie"></select>
+        </div>
+        <div class="champ">
+          <label for="f-a-priorite">Priorité</label>
+          <select id="f-a-priorite" class="saisie"></select>
+        </div>
+      </div>
+      <div class="champ">
+        <label for="f-a-commentaire">Commentaire</label>
+        <textarea id="f-a-commentaire" class="saisie"></textarea>
+      </div>
+      <div class="ligne fenetre-boutons">
+        <button value="supprimer" class="bouton bouton--discret texte-rouge" id="dlg-action-supprimer" formnovalidate>Supprimer l'action</button>
+        <span class="espace-flex"></span>
+        <button value="annuler" class="bouton bouton--discret" formnovalidate>Annuler</button>
+        <button value="valider" class="bouton">Enregistrer</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="donnees-depart.js"></script>
+  <script src="donnees.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>

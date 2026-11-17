@@ -1,62 +1,75 @@
-# Avancement du modèle
+# Avancement du projet
 
 > Mémoire du projet, tenue à jour par Claude — avant chaque Pull Request et à la
 > fin de chaque étape importante.
 
-**Nom :** STARTER ID.Quation — modèle de prototype avec design system intégré
-**Objectif en une phrase :** chaque nouveau projet créé avec « Use this template »
-reçoit automatiquement la charte, les logos, les polices et les règles de marque
-ID.Quation.
+**Nom :** Pilotage de la feuille de route du service gestion
+**Objectif en une phrase :** faire vivre la feuille de route de transformation du
+service gestion (briques, actions, priorités, frise) pour la mise à jour
+hebdomadaire de Louba et le point mensuel Louba / Matthieu.
 
-**Aperçu du catalogue (lien privé) :** https://claude.ai/artifact/KWLVjB8ycZwZgprVtgjWJb
+## Architecture validée
+
+- **Interface** : page web simple (HTML + CSS + JavaScript) dans `prototype/`,
+  avec le design system ID.Quation.
+- **Hébergement** : serveur PHP d'ID.Quation (géré par Matthieu).
+- **Données** (étape 2) : base MySQL + petite API PHP ; connexion par e-mail et
+  mot de passe (sessions PHP). Matthieu et Louba en modification ; Stéphanie
+  pourra être ajoutée en lecture.
+- **Objectif du service** : modifiable par Matthieu et Louba.
+- **Responsables** : liste modifiable depuis l'outil (ajout, renommage, retrait).
 
 ## ✅ Fait
 
-### Design system (`design-system/`)
-- Feuille de style unique `idquation.css` : couleurs, polices, espacements et
-  composants (boutons, pilules, cartes, formulaires, choix de quiz, messages,
-  progression, score, avatar, vidéo avec filigrane, accroches).
-- Catalogue visuel `index.html` avec le code à copier pour chaque composant.
-- Le prototype de départ (`prototype/`) utilise déjà le design system.
+### Étape 1 — Interface complète en mode démo
+- Les données sont enregistrées dans le navigateur (localStorage). Un menu
+  « Je suis » simule l'utilisateur connecté, et un bouton « Réinitialiser la
+  démo » recharge les données de départ.
+- **Feuille de route** : bandeau « Notre cap » (ambition + objectif, modifiable),
+  briques ouvertes, chantiers à venir, briques terminées. On change l'ordre par
+  glisser-déposer (ou au clavier avec les flèches ↑ ↓ sur la poignée ⠿).
+- **Fiche brique** : infos, avancement, boutons Ouvrir / Clôturer / Rouvrir /
+  Supprimer. La liste des actions permet de changer le statut et la priorité en
+  un clic, de changer l'ordre par glisser-déposer et de trier par priorité puis
+  échéance. Une action en retard est signalée en rouge. Commentaire libre.
+- **Historique** par brique : changements de statut, de dates et de priorité,
+  créations et suppressions, datés et attribués.
+- **Synthèse** : filtre par responsable, frise (Gantt) avec le trait
+  « Aujourd'hui » et la part des actions faites, avancement des briques
+  ouvertes, actions en retard ou bloquées, échéances des 30 prochains jours,
+  impression / PDF.
+- **Responsables** : ajouter, renommer, retirer de la liste ou y remettre.
+- Données de départ chargées : 4 briques ouvertes, 3 à ouvrir, 18 actions
+  (statut « À faire », priorité « Moyenne » par défaut).
 
-### Charte officielle (`docs/charte-logos-idquation-2021.pdf`)
-- Couleurs officielles appliquées : rouge `#E72F47`, noir `#220000`, brun Play
-  `#3B312F`, gamme Play (Safe, Form, Fair, Zen) et 5 couleurs secondaires.
-- Interdits de la charte inscrits dans `CLAUDE.md` (une seule couleur d'accent
-  pour le logo, proportions intouchables, couleurs Play intouchables).
-
-### Polices (Boston et Diazo uniquement)
-- **Boston** : utilisée si elle est installée sur l'ordinateur (licence Monotype
-  poste de travail — aucun fichier de police dans le dépôt, bloqué par `.gitignore`).
-- **Diazo** : branchée via le projet web Adobe Fonts ID.Quation
-  (`use.typekit.net/hhx4iux.css`) — version lisse (`diazo-mvb-ex-cond`) et
-  version texturée (`diazo-mvb-rough1-ex-cond`).
-- Aperçu image de Diazo dans le catalogue (les pages claude.ai bloquent Adobe Fonts).
-
-### Logos (`assets/logos/`)
-- ID.Quation : 10 versions (dont le logo principal original), fond clair, fond
-  sombre, tout blanc, avec ou sans signature.
-- Logo en filigrane pour les vidéos (en haut à droite).
-- Pour chacune des 4 formations (Play Safe, Play Form, Play Fair, Play Zen) :
-  10 logos en bulle (blanche et pleine), outils Scan / Pilot / Replay
-  (fond blanc et fond sombre), logo ID.Quation à la couleur de la formation.
-
-### Vidéos (`assets/videos/`)
-- Logo animé intro (5 s) et outro (2 s) : avec musique, muet, et originaux .mov.
-
-### Mascotte Aply (`assets/mascotte/`)
-- 239 poses d'Aply (WebP sans fond), dont le sous-dossier `pyramide/`.
-- Règles d'usage ajoutées dans `CLAUDE.md` (choix de la pose, `alt`, poses à usage interne).
+### Fichiers
+- `prototype/index.html` : structure et fenêtres de saisie.
+- `prototype/app.js` : écrans et interactions.
+- `prototype/donnees.js` : couche de données (démo). **Seul fichier à remplacer
+  pour passer au serveur PHP.**
+- `prototype/donnees-depart.js` : données de départ.
+- `prototype/style.css` : styles propres à l'outil.
 
 ## 🔄 En cours
 
-- _rien pour l'instant_
+- Test de la démo par Matthieu et Louba.
 
-## 📝 Reste à faire
+## 📋 Reste à faire
 
-- Vérifier si Diazo **Rough1** ou **Rough2** correspond le mieux à la charte.
-- Alléger le projet web Adobe Fonts (garder seulement les 2 familles « Ex Cond » utilisées).
-- Recevoir le GIF animé du logo (à envoyer comme fichier).
-- Boston sur le web : acheter une licence webfont, ou garder l'affichage local.
-- Option : replier les blocs de code du catalogue derrière « Voir le code ».
-- Faire la Pull Request pour intégrer ce travail au modèle principal.
+1. **Étape 2 — Serveur PHP + MySQL** : script de création des tables et des
+   données de départ, API PHP (lecture, création, modification, ordre),
+   historique enregistré côté serveur, connexion par mot de passe, rôles
+   éditeur / lecteur. Infos à récupérer : version de PHP, accès à une base
+   MySQL (ou MariaDB), dossier de dépôt sur le serveur.
+2. **Étape 3 — Mise en ligne** sur le serveur PHP et test avec Louba.
+3. Plus tard : compte en lecture pour Stéphanie.
+
+Hors périmètre de la V1 : indicateurs chiffrés, notifications, pièces jointes,
+application mobile.
+
+---
+
+## Socle STARTER ID.Quation (déjà en place)
+
+Design system (`design-system/`), charte officielle (`docs/`), logos, vidéos et
+mascotte Aply (`assets/`), règles de marque dans `CLAUDE.md`.
